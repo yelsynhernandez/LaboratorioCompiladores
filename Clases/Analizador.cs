@@ -23,35 +23,38 @@ namespace LaboratorioCompiladores.Clases
                     if (linea.Length > 0)
                     {
                         contenido = linea.Split(new String[] { "=" }, StringSplitOptions.None);
-                        //Verificando variable
-                        contenido[0] = contenido[0].Trim(' ');
-                        if (!variables.Contains(contenido[0]))
+                        if (contenido.Length == 2)
                         {
-                            variables.Add(contenido[0]);
-                        }
-
-                        //Revision de las producciones
-                        contenido[1] = contenido[1].Trim(' ');
-                        producciones = contenido[1].Split(new String[] { "|" }, StringSplitOptions.None);
-                        patron = @"\'(.*?)\'";
-                        Regex regex = new Regex(patron);
-                        foreach (string produccion in producciones)
-                        {
-                            if (produccion.Equals("e") && !epsilonEncontrado)
+                            //Verificando variable
+                            contenido[0] = contenido[0].Trim(' ');
+                            if (!variables.Contains(contenido[0]))
                             {
-                                terminales.Add(produccion);
-                                epsilonEncontrado = true;
+                                variables.Add(contenido[0]);
                             }
-                            else
+
+                            //Revision de las producciones
+                            contenido[1] = contenido[1].Trim(' ');
+                            producciones = contenido[1].Split(new String[] { "|" }, StringSplitOptions.None);
+                            patron = @"\'(.*?)\'";
+                            Regex regex = new Regex(patron);
+                            foreach (string produccion in producciones)
                             {
-                                MatchCollection coincidencias = regex.Matches(produccion);
-                                foreach (Match coincidencia in coincidencias)
+                                if (produccion.Equals("e") && !epsilonEncontrado)
                                 {
-                                    string terminal = coincidencia.Value;
-                                    terminal = terminal.Replace("'", "");
-                                    if (!terminales.Contains(terminal))
+                                    terminales.Add(produccion);
+                                    epsilonEncontrado = true;
+                                }
+                                else
+                                {
+                                    MatchCollection coincidencias = regex.Matches(produccion);
+                                    foreach (Match coincidencia in coincidencias)
                                     {
-                                        terminales.Add(terminal);
+                                        string terminal = coincidencia.Value;
+                                        terminal = terminal.Replace("'", "");
+                                        if (!terminales.Contains(terminal))
+                                        {
+                                            terminales.Add(terminal);
+                                        }
                                     }
                                 }
                             }
