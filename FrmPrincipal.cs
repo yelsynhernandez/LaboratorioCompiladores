@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LaboratorioCompiladores.Clases;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -7,23 +8,22 @@ namespace LaboratorioCompiladores
 {
     public partial class FrmPrincipal : Form
     {
-        private bool archivoCargado = false;
         public FrmPrincipal()
         {
             InitializeComponent();
         }
 
-        private void btnSalir_Click(object sender, EventArgs e)
+        private void BtnSalir_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
-            TextoDefecto(true);
+            LimpiarControles();
         }
         
-        private void txtArchivo_DragEnter(object sender, DragEventArgs e)
+        private void TxtArchivo_DragEnter(object sender, DragEventArgs e)
         {
             try
             {
@@ -51,43 +51,37 @@ namespace LaboratorioCompiladores
             }
         }
 
-        private void txtArchivo_DragDrop(object sender, DragEventArgs e)
+        private void TxtArchivo_DragDrop(object sender, DragEventArgs e)
         {
             try
             {
-                if (!archivoCargado)
+                string[] archivos = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+                if (Path.GetExtension(archivos[0]).Equals(".txt", StringComparison.OrdinalIgnoreCase))
                 {
-                    string[] archivos = (string[])e.Data.GetData(DataFormats.FileDrop);
+                    string linea = "";
+                    var fs = new FileStream(archivos[0], FileMode.Open, FileAccess.Read);
 
-                    if (Path.GetExtension(archivos[0]).Equals(".txt", StringComparison.OrdinalIgnoreCase))
+                    LimpiarControles();
+                    TextoDefecto(false);
+                    txtArchivo.Text = archivos[0];
+
+                    using (var sr = new StreamReader(fs))
                     {
-                        string linea = "";
-                        var fs = new FileStream(archivos[0], FileMode.Open, FileAccess.Read);
-
-                        LimpiarControles();
-                        TextoDefecto(false);
-                        txtArchivo.Text = archivos[0];
-
-                        using (var sr = new StreamReader(fs))
+                        while ((linea = sr.ReadLine()) != null)
                         {
-                            while ((linea = sr.ReadLine()) != null)
+                            if(linea.Length > 0)
                             {
-                                if(linea.Length > 0)
-                                {
-                                    txtContenidoArchivo.Text += $"{linea}\r\n";
-                                }
+                                txtContenidoArchivo.Text += $"{linea}\r\n";
                             }
                         }
-                        archivoCargado = true;
                     }
-                    else
-                    {
-                        MessageBox.Show("Por favor, arrastra un archivo de texto (.txt).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    Analizador analizador = new Analizador();
+                    analizador.DistribuirContenido(txtContenidoArchivo, txtVariables, txtTerminales);
                 }
                 else
                 {
-                    archivoCargado = false;
+                    MessageBox.Show("Por favor, arrastra un archivo de texto (.txt).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
@@ -96,15 +90,15 @@ namespace LaboratorioCompiladores
             }
         }
 
-        private void btnLimpiar_Click(object sender, EventArgs e)
+        private void BtnLimpiar_Click(object sender, EventArgs e)
         {
             LimpiarControles();
         }
 
         private void TextoDefecto(bool defecto)
         {
-            string fuente = "Segoe UI";
-            float tamanio = 11.25F;
+            string fuente = "Arial";
+            float tamanio = 12F;
 
             if (defecto)
             {
