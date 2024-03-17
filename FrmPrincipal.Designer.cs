@@ -52,7 +52,7 @@
             this.btnSalir.TabIndex = 0;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            this.btnSalir.Click += new System.EventHandler(this.BtnSalir_Click);
             // 
             // txtContenidoArchivo
             // 
@@ -83,8 +83,8 @@
             this.tlpPrincipal.Controls.Add(this.txtTerminales, 5, 3);
             this.tlpPrincipal.Controls.Add(this.lblTerminales, 5, 2);
             this.tlpPrincipal.Controls.Add(this.btnSalir, 5, 4);
-            this.tlpPrincipal.Controls.Add(this.txtArchivo, 1, 1);
             this.tlpPrincipal.Controls.Add(this.btnLimpiar, 1, 4);
+            this.tlpPrincipal.Controls.Add(this.txtArchivo, 1, 1);
             this.tlpPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpPrincipal.Location = new System.Drawing.Point(0, 0);
             this.tlpPrincipal.Name = "tlpPrincipal";
@@ -167,8 +167,8 @@
             this.txtArchivo.ReadOnly = true;
             this.txtArchivo.Size = new System.Drawing.Size(819, 27);
             this.txtArchivo.TabIndex = 9;
-            this.txtArchivo.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtArchivo_DragDrop);
-            this.txtArchivo.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtArchivo_DragEnter);
+            this.txtArchivo.DragDrop += new System.Windows.Forms.DragEventHandler(this.TxtArchivo_DragDrop);
+            this.txtArchivo.DragEnter += new System.Windows.Forms.DragEventHandler(this.TxtArchivo_DragEnter);
             // 
             // btnLimpiar
             // 
@@ -179,7 +179,7 @@
             this.btnLimpiar.TabIndex = 10;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            this.btnLimpiar.Click += new System.EventHandler(this.BtnLimpiar_Click);
             // 
             // FrmPrincipal
             // 
