@@ -20,7 +20,7 @@ namespace LaboratorioCompiladores
 
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
-            TextoDefecto(True);
+            TextoDefecto(true);
         }
         
         private void txtArchivo_DragEnter(object sender, DragEventArgs e)
@@ -127,7 +127,5 @@ namespace LaboratorioCompiladores
             txtTerminales.Clear();
             TextoDefecto(true);
         }
-
-        
     }
 }
