@@ -30,37 +30,41 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipal));
             this.btnSalir = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtContenidoArchivo = new System.Windows.Forms.TextBox();
             this.tlpPrincipal = new System.Windows.Forms.TableLayoutPanel();
             this.lblContenidoArchivo = new System.Windows.Forms.Label();
             this.lblVariables = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtVariables = new System.Windows.Forms.TextBox();
+            this.txtTerminales = new System.Windows.Forms.TextBox();
             this.lblTerminales = new System.Windows.Forms.Label();
             this.txtArchivo = new System.Windows.Forms.TextBox();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.tlpPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSalir
             // 
             this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSalir.Location = new System.Drawing.Point(691, 491);
+            this.btnSalir.Location = new System.Drawing.Point(783, 556);
             this.btnSalir.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(84, 27);
+            this.btnSalir.Size = new System.Drawing.Size(94, 30);
             this.btnSalir.TabIndex = 0;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
-            // textBox2
+            // txtContenidoArchivo
             // 
-            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Location = new System.Drawing.Point(51, 167);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(336, 270);
-            this.textBox2.TabIndex = 3;
+            this.txtContenidoArchivo.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.txtContenidoArchivo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtContenidoArchivo.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtContenidoArchivo.Location = new System.Drawing.Point(58, 189);
+            this.txtContenidoArchivo.Multiline = true;
+            this.txtContenidoArchivo.Name = "txtContenidoArchivo";
+            this.txtContenidoArchivo.ReadOnly = true;
+            this.txtContenidoArchivo.Size = new System.Drawing.Size(379, 305);
+            this.txtContenidoArchivo.TabIndex = 3;
             // 
             // tlpPrincipal
             // 
@@ -72,14 +76,15 @@
             this.tlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.882352F));
             this.tlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.64706F));
             this.tlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.882352F));
-            this.tlpPrincipal.Controls.Add(this.textBox2, 1, 3);
+            this.tlpPrincipal.Controls.Add(this.txtContenidoArchivo, 1, 3);
             this.tlpPrincipal.Controls.Add(this.lblContenidoArchivo, 1, 2);
             this.tlpPrincipal.Controls.Add(this.lblVariables, 3, 2);
-            this.tlpPrincipal.Controls.Add(this.textBox1, 3, 3);
-            this.tlpPrincipal.Controls.Add(this.textBox3, 5, 3);
+            this.tlpPrincipal.Controls.Add(this.txtVariables, 3, 3);
+            this.tlpPrincipal.Controls.Add(this.txtTerminales, 5, 3);
             this.tlpPrincipal.Controls.Add(this.lblTerminales, 5, 2);
             this.tlpPrincipal.Controls.Add(this.btnSalir, 5, 4);
             this.tlpPrincipal.Controls.Add(this.txtArchivo, 1, 1);
+            this.tlpPrincipal.Controls.Add(this.btnLimpiar, 1, 4);
             this.tlpPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpPrincipal.Location = new System.Drawing.Point(0, 0);
             this.tlpPrincipal.Name = "tlpPrincipal";
@@ -90,16 +95,17 @@
             this.tlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tlpPrincipal.Size = new System.Drawing.Size(832, 553);
+            this.tlpPrincipal.Size = new System.Drawing.Size(936, 622);
             this.tlpPrincipal.TabIndex = 4;
             // 
             // lblContenidoArchivo
             // 
             this.lblContenidoArchivo.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblContenidoArchivo.AutoSize = true;
-            this.lblContenidoArchivo.Location = new System.Drawing.Point(135, 145);
+            this.lblContenidoArchivo.Font = new System.Drawing.Font("Arial", 14F);
+            this.lblContenidoArchivo.Location = new System.Drawing.Point(150, 164);
             this.lblContenidoArchivo.Name = "lblContenidoArchivo";
-            this.lblContenidoArchivo.Size = new System.Drawing.Size(168, 19);
+            this.lblContenidoArchivo.Size = new System.Drawing.Size(195, 22);
             this.lblContenidoArchivo.TabIndex = 4;
             this.lblContenidoArchivo.Text = "Contenido del Archivo";
             // 
@@ -107,57 +113,81 @@
             // 
             this.lblVariables.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblVariables.AutoSize = true;
-            this.lblVariables.Location = new System.Drawing.Point(473, 145);
+            this.lblVariables.Font = new System.Drawing.Font("Arial", 14F);
+            this.lblVariables.Location = new System.Drawing.Point(533, 164);
             this.lblVariables.Name = "lblVariables";
-            this.lblVariables.Size = new System.Drawing.Size(76, 19);
+            this.lblVariables.Size = new System.Drawing.Size(88, 22);
             this.lblVariables.TabIndex = 5;
             this.lblVariables.Text = "Variables";
             // 
-            // textBox1
+            // txtVariables
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(441, 167);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(140, 270);
-            this.textBox1.TabIndex = 6;
+            this.txtVariables.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.txtVariables.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtVariables.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtVariables.Location = new System.Drawing.Point(498, 189);
+            this.txtVariables.Multiline = true;
+            this.txtVariables.Name = "txtVariables";
+            this.txtVariables.ReadOnly = true;
+            this.txtVariables.Size = new System.Drawing.Size(159, 305);
+            this.txtVariables.TabIndex = 6;
             // 
-            // textBox3
+            // txtTerminales
             // 
-            this.textBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox3.Location = new System.Drawing.Point(635, 167);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(140, 270);
-            this.textBox3.TabIndex = 7;
+            this.txtTerminales.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.txtTerminales.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtTerminales.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtTerminales.Location = new System.Drawing.Point(718, 189);
+            this.txtTerminales.Multiline = true;
+            this.txtTerminales.Name = "txtTerminales";
+            this.txtTerminales.ReadOnly = true;
+            this.txtTerminales.Size = new System.Drawing.Size(159, 305);
+            this.txtTerminales.TabIndex = 7;
             // 
             // lblTerminales
             // 
             this.lblTerminales.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblTerminales.AutoSize = true;
-            this.lblTerminales.Location = new System.Drawing.Point(662, 145);
+            this.lblTerminales.Font = new System.Drawing.Font("Arial", 14F);
+            this.lblTerminales.Location = new System.Drawing.Point(746, 164);
             this.lblTerminales.Name = "lblTerminales";
-            this.lblTerminales.Size = new System.Drawing.Size(86, 19);
+            this.lblTerminales.Size = new System.Drawing.Size(102, 22);
             this.lblTerminales.TabIndex = 8;
             this.lblTerminales.Text = "Terminales";
             // 
             // txtArchivo
             // 
+            this.txtArchivo.AllowDrop = true;
             this.txtArchivo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtArchivo.BackColor = System.Drawing.SystemColors.ControlLight;
             this.tlpPrincipal.SetColumnSpan(this.txtArchivo, 5);
             this.txtArchivo.Font = new System.Drawing.Font("Arial", 13F);
-            this.txtArchivo.Location = new System.Drawing.Point(51, 52);
+            this.txtArchivo.Location = new System.Drawing.Point(58, 64);
             this.txtArchivo.Name = "txtArchivo";
-            this.txtArchivo.Size = new System.Drawing.Size(724, 32);
+            this.txtArchivo.ReadOnly = true;
+            this.txtArchivo.Size = new System.Drawing.Size(819, 27);
             this.txtArchivo.TabIndex = 9;
+            this.txtArchivo.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtArchivo_DragDrop);
+            this.txtArchivo.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtArchivo_DragEnter);
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnLimpiar.Location = new System.Drawing.Point(58, 556);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(75, 31);
+            this.btnLimpiar.TabIndex = 10;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // FrmPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(832, 553);
+            this.ClientSize = new System.Drawing.Size(936, 622);
             this.Controls.Add(this.tlpPrincipal);
-            this.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Arial", 12F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FrmPrincipal";
@@ -173,14 +203,15 @@
         #endregion
 
         private System.Windows.Forms.Button btnSalir;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtContenidoArchivo;
         private System.Windows.Forms.TableLayoutPanel tlpPrincipal;
         private System.Windows.Forms.Label lblContenidoArchivo;
         private System.Windows.Forms.Label lblVariables;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtVariables;
+        private System.Windows.Forms.TextBox txtTerminales;
         private System.Windows.Forms.Label lblTerminales;
         private System.Windows.Forms.TextBox txtArchivo;
+        private System.Windows.Forms.Button btnLimpiar;
     }
 }
 
