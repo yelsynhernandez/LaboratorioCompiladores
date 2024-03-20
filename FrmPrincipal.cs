@@ -20,6 +20,7 @@ namespace LaboratorioCompiladores
 
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
+            lblAutor.Text = "Carnet: 9490-17-969. Nombre: Yelsyn Hernández. Curso: Compiladores";
             LimpiarControles();
         }
         
@@ -77,7 +78,7 @@ namespace LaboratorioCompiladores
                         }
                     }
                     Analizador analizador = new Analizador();
-                    analizador.DistribuirContenido(txtContenidoArchivo, txtVariables, txtTerminales);
+                    analizador.DistribuirContenido(txtContenidoArchivo, txtVariables, txtTerminales, lblTotalVariables, lblTotalTerminales);
                 }
                 else
                 {
@@ -98,7 +99,7 @@ namespace LaboratorioCompiladores
         private void TextoDefecto(bool defecto)
         {
             string fuente = "Arial";
-            float tamanio = 12F;
+            float tamanio = 14F;
 
             if (defecto)
             {
@@ -119,6 +120,10 @@ namespace LaboratorioCompiladores
             txtContenidoArchivo.Clear();
             txtVariables.Clear();
             txtTerminales.Clear();
+            lblTotalVariables.Text = String.Empty;
+            lblTotalVariables.Visible = false;
+            lblTotalTerminales.Text = String.Empty;
+            lblTotalTerminales.Visible = false;
             TextoDefecto(true);
         }
     }

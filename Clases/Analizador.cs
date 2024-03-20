@@ -10,13 +10,13 @@ namespace LaboratorioCompiladores.Clases
     {
         private List<string> variables = new List<string>();
         private List<string> terminales = new List<string>();
-        public void DistribuirContenido(TextBox txtContenido, TextBox txtVariables, TextBox txtTerminales)
+        public void DistribuirContenido(TextBox txtContenido, TextBox txtVariables, TextBox txtTerminales, Label lblTotalVariables, Label lblTotalTerminales)
         {
             try { 
 
                 string[] contenido;
                 string[] producciones;
-                string patron;
+                string er;
                 bool epsilonEncontrado = false;
                 foreach (string linea in txtContenido.Lines)
                 {
@@ -35,8 +35,8 @@ namespace LaboratorioCompiladores.Clases
                             //Revision de las producciones
                             contenido[1] = contenido[1].Trim(' ');
                             producciones = contenido[1].Split(new String[] { "|" }, StringSplitOptions.None);
-                            patron = @"\'(.*?)\'";
-                            Regex regex = new Regex(patron);
+                            er = @"\'(.*?)\'";
+                            Regex regex = new Regex(er);
                             foreach (string produccion in producciones)
                             {
                                 if (produccion.Equals("e") && !epsilonEncontrado)
@@ -62,7 +62,11 @@ namespace LaboratorioCompiladores.Clases
                     }
                 }
                 CargarContenido(variables, txtVariables);
-                CargarContenido(terminales, txtTerminales); 
+                CargarContenido(terminales, txtTerminales);
+                lblTotalVariables.Text = $"Total: {variables.Count}";
+                lblTotalTerminales.Text = $"Total: {terminales.Count}";
+                lblTotalVariables.Visible = true;
+                lblTotalTerminales.Visible = true;
             }
             catch(Exception ex)
             {
