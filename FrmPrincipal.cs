@@ -99,7 +99,7 @@ namespace LaboratorioCompiladores
         private void TextoDefecto(bool defecto)
         {
             string fuente = "Arial";
-            float tamanio = 14F;
+            float tamanio = 13F;
 
             if (defecto)
             {
