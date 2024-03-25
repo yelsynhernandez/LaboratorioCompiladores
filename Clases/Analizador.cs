@@ -49,7 +49,6 @@ namespace LaboratorioCompiladores.Clases
                                 foreach (Match coincidencia in coincidencias)
                                 {
                                     terminal = coincidencia.Value.Replace("'","");
-                                    //terminal = terminal.Replace("'", "");
                                     if (!terminales.Contains(terminal))
                                     {
                                         terminales.Add(terminal);
