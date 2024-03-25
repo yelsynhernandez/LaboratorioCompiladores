@@ -2,7 +2,6 @@
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Diagnostics;
 
 namespace LaboratorioCompiladores.Clases
 {
@@ -12,12 +11,15 @@ namespace LaboratorioCompiladores.Clases
         private List<string> terminales = new List<string>();
         public void DistribuirContenido(TextBox txtContenido, TextBox txtVariables, TextBox txtTerminales, Label lblTotalVariables, Label lblTotalTerminales)
         {
-            try { 
-
+            try {
+                Regex regex;
+                MatchCollection coincidencias;
+                string terminal;
+                string er;
                 string[] contenido;
                 string[] producciones;
-                string er;
                 bool epsilonEncontrado = false;
+                
                 foreach (string linea in txtContenido.Lines)
                 {
                     if (linea.Length > 0)
@@ -25,7 +27,6 @@ namespace LaboratorioCompiladores.Clases
                         contenido = linea.Split(new String[] { "=" }, StringSplitOptions.None);
                         if (contenido.Length == 2)
                         {
-                            //Verificando variable
                             contenido[0] = contenido[0].Trim(' ');
                             if (!variables.Contains(contenido[0]))
                             {
@@ -36,30 +37,31 @@ namespace LaboratorioCompiladores.Clases
                             contenido[1] = contenido[1].Trim(' ');
                             producciones = contenido[1].Split(new String[] { "|" }, StringSplitOptions.None);
                             er = @"\'(.*?)\'";
-                            Regex regex = new Regex(er);
+                            regex = new Regex(er);
                             foreach (string produccion in producciones)
                             {
-                                if (produccion.Equals("e") && !epsilonEncontrado)
+                                if (produccion.Contains("e") && !epsilonEncontrado)
                                 {
-                                    terminales.Add(produccion);
                                     epsilonEncontrado = true;
                                 }
-                                else
+
+                                coincidencias = regex.Matches(produccion);
+                                foreach (Match coincidencia in coincidencias)
                                 {
-                                    MatchCollection coincidencias = regex.Matches(produccion);
-                                    foreach (Match coincidencia in coincidencias)
+                                    terminal = coincidencia.Value.Replace("'","");
+                                    //terminal = terminal.Replace("'", "");
+                                    if (!terminales.Contains(terminal))
                                     {
-                                        string terminal = coincidencia.Value;
-                                        terminal = terminal.Replace("'", "");
-                                        if (!terminales.Contains(terminal))
-                                        {
-                                            terminales.Add(terminal);
-                                        }
+                                        terminales.Add(terminal);
                                     }
                                 }
                             }
                         }
                     }
+                }
+                if (epsilonEncontrado)
+                {
+                    terminales.Add("e");
                 }
                 CargarContenido(variables, txtVariables);
                 CargarContenido(terminales, txtTerminales);
