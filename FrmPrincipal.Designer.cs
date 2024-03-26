@@ -32,7 +32,6 @@
             this.btnSalir = new System.Windows.Forms.Button();
             this.txtContenidoArchivo = new System.Windows.Forms.TextBox();
             this.tlpPrincipal = new System.Windows.Forms.TableLayoutPanel();
-            this.lblTotalTerminales = new System.Windows.Forms.Label();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.txtVariables = new System.Windows.Forms.TextBox();
             this.txtTerminales = new System.Windows.Forms.TextBox();
@@ -41,14 +40,16 @@
             this.lblContenidoArchivo = new System.Windows.Forms.Label();
             this.txtArchivo = new System.Windows.Forms.TextBox();
             this.lblAutor = new System.Windows.Forms.Label();
-            this.lblTotalVariables = new System.Windows.Forms.Label();
+            this.dgvMatrizProducciones = new System.Windows.Forms.DataGridView();
+            this.lblMatrizProducciones = new System.Windows.Forms.Label();
             this.tlpPrincipal.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMatrizProducciones)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSalir
             // 
             this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSalir.Location = new System.Drawing.Point(957, 560);
+            this.btnSalir.Location = new System.Drawing.Point(952, 576);
             this.btnSalir.Margin = new System.Windows.Forms.Padding(4);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(109, 36);
@@ -62,27 +63,26 @@
             this.txtContenidoArchivo.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.txtContenidoArchivo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtContenidoArchivo.Font = new System.Drawing.Font("Arial", 12F);
-            this.txtContenidoArchivo.Location = new System.Drawing.Point(38, 196);
+            this.txtContenidoArchivo.Location = new System.Drawing.Point(41, 195);
             this.txtContenidoArchivo.Margin = new System.Windows.Forms.Padding(5);
             this.txtContenidoArchivo.Multiline = true;
             this.txtContenidoArchivo.Name = "txtContenidoArchivo";
             this.txtContenidoArchivo.ReadOnly = true;
-            this.txtContenidoArchivo.Size = new System.Drawing.Size(502, 272);
+            this.txtContenidoArchivo.Size = new System.Drawing.Size(319, 274);
             this.txtContenidoArchivo.TabIndex = 5;
             // 
             // tlpPrincipal
             // 
-            this.tlpPrincipal.ColumnCount = 7;
-            this.tlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.049438F));
-            this.tlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 46.35462F));
-            this.tlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2.015418F));
-            this.tlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.1696F));
-            this.tlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2.015418F));
-            this.tlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.34607F));
-            this.tlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.049438F));
-            this.tlpPrincipal.Controls.Add(this.lblTotalTerminales, 5, 5);
-            this.tlpPrincipal.Controls.Add(this.btnSalir, 5, 6);
-            this.tlpPrincipal.Controls.Add(this.btnLimpiar, 1, 6);
+            this.tlpPrincipal.ColumnCount = 9;
+            this.tlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.309811F));
+            this.tlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.82112F));
+            this.tlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2.0034F));
+            this.tlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.14852F));
+            this.tlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2.0034F));
+            this.tlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.14852F));
+            this.tlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 1.988074F));
+            this.tlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.26734F));
+            this.tlpPrincipal.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.309811F));
             this.tlpPrincipal.Controls.Add(this.txtContenidoArchivo, 1, 4);
             this.tlpPrincipal.Controls.Add(this.txtVariables, 3, 4);
             this.tlpPrincipal.Controls.Add(this.txtTerminales, 5, 4);
@@ -91,39 +91,29 @@
             this.tlpPrincipal.Controls.Add(this.lblContenidoArchivo, 1, 3);
             this.tlpPrincipal.Controls.Add(this.txtArchivo, 1, 2);
             this.tlpPrincipal.Controls.Add(this.lblAutor, 1, 1);
-            this.tlpPrincipal.Controls.Add(this.lblTotalVariables, 3, 5);
+            this.tlpPrincipal.Controls.Add(this.dgvMatrizProducciones, 7, 4);
+            this.tlpPrincipal.Controls.Add(this.lblMatrizProducciones, 7, 3);
+            this.tlpPrincipal.Controls.Add(this.btnLimpiar, 1, 5);
+            this.tlpPrincipal.Controls.Add(this.btnSalir, 7, 5);
             this.tlpPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpPrincipal.Location = new System.Drawing.Point(0, 0);
             this.tlpPrincipal.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tlpPrincipal.Name = "tlpPrincipal";
-            this.tlpPrincipal.RowCount = 8;
-            this.tlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.941027F));
-            this.tlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.002438F));
-            this.tlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.003249F));
-            this.tlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.03149F));
-            this.tlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 44.14553F));
-            this.tlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.053181F));
-            this.tlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.88206F));
-            this.tlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.941027F));
+            this.tlpPrincipal.RowCount = 7;
+            this.tlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.333333F));
+            this.tlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.777778F));
+            this.tlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.777778F));
+            this.tlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
+            this.tlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 44.44444F));
+            this.tlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.22222F));
+            this.tlpPrincipal.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.333333F));
             this.tlpPrincipal.Size = new System.Drawing.Size(1106, 640);
             this.tlpPrincipal.TabIndex = 4;
-            // 
-            // lblTotalTerminales
-            // 
-            this.lblTotalTerminales.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.lblTotalTerminales.AutoSize = true;
-            this.lblTotalTerminales.Font = new System.Drawing.Font("Arial", 14F);
-            this.lblTotalTerminales.Location = new System.Drawing.Point(876, 478);
-            this.lblTotalTerminales.Margin = new System.Windows.Forms.Padding(4, 5, 4, 0);
-            this.lblTotalTerminales.Name = "lblTotalTerminales";
-            this.lblTotalTerminales.Size = new System.Drawing.Size(152, 46);
-            this.lblTotalTerminales.TabIndex = 9;
-            this.lblTotalTerminales.Text = "[Total terminales]";
             // 
             // btnLimpiar
             // 
             this.btnLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLimpiar.Location = new System.Drawing.Point(37, 561);
+            this.btnLimpiar.Location = new System.Drawing.Point(40, 577);
             this.btnLimpiar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(109, 36);
@@ -137,12 +127,12 @@
             this.txtVariables.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.txtVariables.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtVariables.Font = new System.Drawing.Font("Arial", 12F);
-            this.txtVariables.Location = new System.Drawing.Point(571, 194);
+            this.txtVariables.Location = new System.Drawing.Point(391, 193);
             this.txtVariables.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtVariables.Multiline = true;
             this.txtVariables.Name = "txtVariables";
             this.txtVariables.ReadOnly = true;
-            this.txtVariables.Size = new System.Drawing.Size(237, 276);
+            this.txtVariables.Size = new System.Drawing.Size(159, 278);
             this.txtVariables.TabIndex = 6;
             // 
             // txtTerminales
@@ -150,12 +140,12 @@
             this.txtTerminales.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.txtTerminales.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtTerminales.Font = new System.Drawing.Font("Arial", 12F);
-            this.txtTerminales.Location = new System.Drawing.Point(838, 194);
+            this.txtTerminales.Location = new System.Drawing.Point(580, 193);
             this.txtTerminales.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtTerminales.Multiline = true;
             this.txtTerminales.Name = "txtTerminales";
             this.txtTerminales.ReadOnly = true;
-            this.txtTerminales.Size = new System.Drawing.Size(228, 276);
+            this.txtTerminales.Size = new System.Drawing.Size(159, 278);
             this.txtTerminales.TabIndex = 7;
             // 
             // lblTerminales
@@ -163,7 +153,7 @@
             this.lblTerminales.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblTerminales.AutoSize = true;
             this.lblTerminales.Font = new System.Drawing.Font("Arial", 14F);
-            this.lblTerminales.Location = new System.Drawing.Point(901, 169);
+            this.lblTerminales.Location = new System.Drawing.Point(608, 168);
             this.lblTerminales.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTerminales.Name = "lblTerminales";
             this.lblTerminales.Size = new System.Drawing.Size(102, 22);
@@ -175,7 +165,7 @@
             this.lblVariables.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblVariables.AutoSize = true;
             this.lblVariables.Font = new System.Drawing.Font("Arial", 14F);
-            this.lblVariables.Location = new System.Drawing.Point(645, 169);
+            this.lblVariables.Location = new System.Drawing.Point(426, 168);
             this.lblVariables.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVariables.Name = "lblVariables";
             this.lblVariables.Size = new System.Drawing.Size(88, 22);
@@ -187,7 +177,7 @@
             this.lblContenidoArchivo.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblContenidoArchivo.AutoSize = true;
             this.lblContenidoArchivo.Font = new System.Drawing.Font("Arial", 14F);
-            this.lblContenidoArchivo.Location = new System.Drawing.Point(191, 169);
+            this.lblContenidoArchivo.Location = new System.Drawing.Point(103, 168);
             this.lblContenidoArchivo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblContenidoArchivo.Name = "lblContenidoArchivo";
             this.lblContenidoArchivo.Size = new System.Drawing.Size(195, 22);
@@ -198,14 +188,14 @@
             // 
             this.txtArchivo.AllowDrop = true;
             this.txtArchivo.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.tlpPrincipal.SetColumnSpan(this.txtArchivo, 5);
+            this.tlpPrincipal.SetColumnSpan(this.txtArchivo, 7);
             this.txtArchivo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtArchivo.Font = new System.Drawing.Font("Arial", 14F);
-            this.txtArchivo.Location = new System.Drawing.Point(37, 86);
+            this.txtArchivo.Location = new System.Drawing.Point(40, 80);
             this.txtArchivo.Margin = new System.Windows.Forms.Padding(4, 10, 4, 3);
             this.txtArchivo.Name = "txtArchivo";
             this.txtArchivo.ReadOnly = true;
-            this.txtArchivo.Size = new System.Drawing.Size(1029, 29);
+            this.txtArchivo.Size = new System.Drawing.Size(1021, 29);
             this.txtArchivo.TabIndex = 1;
             this.txtArchivo.DragDrop += new System.Windows.Forms.DragEventHandler(this.TxtArchivo_DragDrop);
             this.txtArchivo.DragEnter += new System.Windows.Forms.DragEventHandler(this.TxtArchivo_DragEnter);
@@ -213,9 +203,9 @@
             // lblAutor
             // 
             this.lblAutor.AutoSize = true;
-            this.tlpPrincipal.SetColumnSpan(this.lblAutor, 5);
+            this.tlpPrincipal.SetColumnSpan(this.lblAutor, 7);
             this.lblAutor.Font = new System.Drawing.Font("Arial", 14F);
-            this.lblAutor.Location = new System.Drawing.Point(37, 42);
+            this.lblAutor.Location = new System.Drawing.Point(40, 25);
             this.lblAutor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
             this.lblAutor.Name = "lblAutor";
             this.lblAutor.Size = new System.Drawing.Size(65, 22);
@@ -223,17 +213,30 @@
             this.lblAutor.Text = "[Autor]";
             this.lblAutor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblTotalVariables
+            // dgvMatrizProducciones
             // 
-            this.lblTotalVariables.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.lblTotalVariables.AutoSize = true;
-            this.lblTotalVariables.Font = new System.Drawing.Font("Arial", 14F);
-            this.lblTotalVariables.Location = new System.Drawing.Point(619, 478);
-            this.lblTotalVariables.Margin = new System.Windows.Forms.Padding(4, 5, 4, 0);
-            this.lblTotalVariables.Name = "lblTotalVariables";
-            this.lblTotalVariables.Size = new System.Drawing.Size(140, 46);
-            this.lblTotalVariables.TabIndex = 8;
-            this.lblTotalVariables.Text = "[Total variables]";
+            this.dgvMatrizProducciones.AllowUserToAddRows = false;
+            this.dgvMatrizProducciones.AllowUserToDeleteRows = false;
+            this.dgvMatrizProducciones.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dgvMatrizProducciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMatrizProducciones.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvMatrizProducciones.Location = new System.Drawing.Point(767, 193);
+            this.dgvMatrizProducciones.Name = "dgvMatrizProducciones";
+            this.dgvMatrizProducciones.ReadOnly = true;
+            this.dgvMatrizProducciones.Size = new System.Drawing.Size(295, 278);
+            this.dgvMatrizProducciones.TabIndex = 12;
+            // 
+            // lblMatrizProducciones
+            // 
+            this.lblMatrizProducciones.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.lblMatrizProducciones.AutoSize = true;
+            this.lblMatrizProducciones.Font = new System.Drawing.Font("Arial", 14F);
+            this.lblMatrizProducciones.Location = new System.Drawing.Point(811, 168);
+            this.lblMatrizProducciones.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMatrizProducciones.Name = "lblMatrizProducciones";
+            this.lblMatrizProducciones.Size = new System.Drawing.Size(206, 22);
+            this.lblMatrizProducciones.TabIndex = 13;
+            this.lblMatrizProducciones.Text = "Matriz de producciones";
             // 
             // FrmPrincipal
             // 
@@ -250,6 +253,7 @@
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             this.tlpPrincipal.ResumeLayout(false);
             this.tlpPrincipal.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMatrizProducciones)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -267,8 +271,8 @@
         private System.Windows.Forms.TextBox txtArchivo;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Label lblAutor;
-        private System.Windows.Forms.Label lblTotalVariables;
-        private System.Windows.Forms.Label lblTotalTerminales;
+        private System.Windows.Forms.DataGridView dgvMatrizProducciones;
+        private System.Windows.Forms.Label lblMatrizProducciones;
     }
 }
 

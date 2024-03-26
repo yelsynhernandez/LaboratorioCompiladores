@@ -78,7 +78,8 @@ namespace LaboratorioCompiladores
                         }
                     }
                     Analizador analizador = new Analizador();
-                    analizador.DistribuirContenido(txtContenidoArchivo, txtVariables, txtTerminales, lblTotalVariables, lblTotalTerminales);
+                    analizador.DistribuirContenido(txtContenidoArchivo, txtVariables, txtTerminales, lblVariables, lblTerminales);
+                    analizador.GenerarMatrizProducciones(txtContenidoArchivo, dgvMatrizProducciones);
                 }
                 else
                 {
@@ -120,11 +121,10 @@ namespace LaboratorioCompiladores
             txtContenidoArchivo.Clear();
             txtVariables.Clear();
             txtTerminales.Clear();
-            lblTotalVariables.Text = String.Empty;
-            lblTotalVariables.Visible = false;
-            lblTotalTerminales.Text = String.Empty;
-            lblTotalTerminales.Visible = false;
+            lblVariables.Text = "Variables";
+            lblTerminales.Text = "Terminales";
             TextoDefecto(true);
         }
+    
     }
 }
