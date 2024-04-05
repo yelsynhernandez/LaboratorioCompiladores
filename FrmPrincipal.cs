@@ -79,7 +79,7 @@ namespace LaboratorioCompiladores
                     }
                     Analizador analizador = new Analizador();
                     analizador.DistribuirContenido(txtContenidoArchivo, txtVariables, txtTerminales, lblVariables, lblTerminales);
-                    analizador.GenerarMatrizProducciones(txtContenidoArchivo, dgvMatrizProducciones);
+                    analizador.GenerarMatrizProducciones(txtContenidoArchivo, dgvMatrizProducciones, lblMatrizProducciones);
                 }
                 else
                 {
@@ -123,6 +123,7 @@ namespace LaboratorioCompiladores
             txtTerminales.Clear();
             lblVariables.Text = "Variables";
             lblTerminales.Text = "Terminales";
+            lblMatrizProducciones.Text = "Matriz de producciones";
             TextoDefecto(true);
         }
     

@@ -104,12 +104,12 @@ namespace LaboratorioCompiladores.Clases
             }
         }
 
-        public void GenerarMatrizProducciones(TextBox txt, DataGridView dgv)
+        public void GenerarMatrizProducciones(TextBox txt, DataGridView dgv, Label lbl)
         {
             try
             {
-                matrizProducciones.Add(new string[] {"Variable", "Producción" });
-                foreach(string linea in txt.Lines)
+                matrizProducciones.Add(new string[] { "Variable", "Producción" });
+                foreach (string linea in txt.Lines)
                 {
                     if (linea.Length > 0)
                     {
@@ -124,7 +124,7 @@ namespace LaboratorioCompiladores.Clases
 
                             foreach (string produccion in producciones)
                             {
-                                if(!EncontrarProduccion(matrizProducciones, subcadenas[0], produccion))
+                                if (!EncontrarProduccion(matrizProducciones, subcadenas[0], produccion))
                                 {
                                     matrizProducciones.Add(new string[] { subcadenas[0], produccion });
                                 }
@@ -134,12 +134,12 @@ namespace LaboratorioCompiladores.Clases
                 }
                 //Se adapta la matriz de producciones a un datatable para utilizar en la interfaz
                 DataTable dt = new DataTable();
-                foreach(string columna in matrizProducciones[0])
+                foreach (string columna in matrizProducciones[0])
                 {
                     dt.Columns.Add(columna);
                 }
 
-                for(int i = 1; i < matrizProducciones.Count; i++)
+                for (int i = 1; i < matrizProducciones.Count; i++)
                 {
                     dt.Rows.Add(matrizProducciones[i].ToArray());
                 }
@@ -174,9 +174,12 @@ namespace LaboratorioCompiladores.Clases
                 style.ForeColor = ColorTranslator.FromHtml("#212529");
                 dgv.DefaultCellStyle = style;
 
-                dgv.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#00509d");
-                dgv.ColumnHeadersDefaultCellStyle.ForeColor = ColorTranslator.FromHtml("#CED4DA");
+                dgv.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#BFC2C4");
+                dgv.ColumnHeadersDefaultCellStyle.ForeColor = ColorTranslator.FromHtml("#000000");
                 dgv.EnableHeadersVisualStyles = false;
+
+
+                lbl.Text += $" [{dgv.RowCount}]";
 
             }
             catch(Exception ex)

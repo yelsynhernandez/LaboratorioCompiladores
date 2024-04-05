@@ -32,7 +32,6 @@
             this.btnSalir = new System.Windows.Forms.Button();
             this.txtContenidoArchivo = new System.Windows.Forms.TextBox();
             this.tlpPrincipal = new System.Windows.Forms.TableLayoutPanel();
-            this.btnLimpiar = new System.Windows.Forms.Button();
             this.txtVariables = new System.Windows.Forms.TextBox();
             this.txtTerminales = new System.Windows.Forms.TextBox();
             this.lblTerminales = new System.Windows.Forms.Label();
@@ -42,6 +41,7 @@
             this.lblAutor = new System.Windows.Forms.Label();
             this.dgvMatrizProducciones = new System.Windows.Forms.DataGridView();
             this.lblMatrizProducciones = new System.Windows.Forms.Label();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.tlpPrincipal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatrizProducciones)).BeginInit();
             this.SuspendLayout();
@@ -110,18 +110,6 @@
             this.tlpPrincipal.Size = new System.Drawing.Size(1106, 640);
             this.tlpPrincipal.TabIndex = 4;
             // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLimpiar.Location = new System.Drawing.Point(40, 577);
-            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(109, 36);
-            this.btnLimpiar.TabIndex = 10;
-            this.btnLimpiar.Text = "Limpiar";
-            this.btnLimpiar.UseVisualStyleBackColor = true;
-            this.btnLimpiar.Click += new System.EventHandler(this.BtnLimpiar_Click);
-            // 
             // txtVariables
             // 
             this.txtVariables.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -153,10 +141,10 @@
             this.lblTerminales.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblTerminales.AutoSize = true;
             this.lblTerminales.Font = new System.Drawing.Font("Arial", 14F);
-            this.lblTerminales.Location = new System.Drawing.Point(608, 168);
+            this.lblTerminales.Location = new System.Drawing.Point(596, 163);
             this.lblTerminales.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTerminales.Name = "lblTerminales";
-            this.lblTerminales.Size = new System.Drawing.Size(102, 22);
+            this.lblTerminales.Size = new System.Drawing.Size(127, 27);
             this.lblTerminales.TabIndex = 4;
             this.lblTerminales.Text = "Terminales";
             // 
@@ -165,10 +153,10 @@
             this.lblVariables.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblVariables.AutoSize = true;
             this.lblVariables.Font = new System.Drawing.Font("Arial", 14F);
-            this.lblVariables.Location = new System.Drawing.Point(426, 168);
+            this.lblVariables.Location = new System.Drawing.Point(416, 163);
             this.lblVariables.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVariables.Name = "lblVariables";
-            this.lblVariables.Size = new System.Drawing.Size(88, 22);
+            this.lblVariables.Size = new System.Drawing.Size(109, 27);
             this.lblVariables.TabIndex = 3;
             this.lblVariables.Text = "Variables";
             // 
@@ -177,10 +165,10 @@
             this.lblContenidoArchivo.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblContenidoArchivo.AutoSize = true;
             this.lblContenidoArchivo.Font = new System.Drawing.Font("Arial", 14F);
-            this.lblContenidoArchivo.Location = new System.Drawing.Point(103, 168);
+            this.lblContenidoArchivo.Location = new System.Drawing.Point(77, 163);
             this.lblContenidoArchivo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblContenidoArchivo.Name = "lblContenidoArchivo";
-            this.lblContenidoArchivo.Size = new System.Drawing.Size(195, 22);
+            this.lblContenidoArchivo.Size = new System.Drawing.Size(246, 27);
             this.lblContenidoArchivo.TabIndex = 2;
             this.lblContenidoArchivo.Text = "Contenido del Archivo";
             // 
@@ -195,7 +183,7 @@
             this.txtArchivo.Margin = new System.Windows.Forms.Padding(4, 10, 4, 3);
             this.txtArchivo.Name = "txtArchivo";
             this.txtArchivo.ReadOnly = true;
-            this.txtArchivo.Size = new System.Drawing.Size(1021, 29);
+            this.txtArchivo.Size = new System.Drawing.Size(1021, 34);
             this.txtArchivo.TabIndex = 1;
             this.txtArchivo.DragDrop += new System.Windows.Forms.DragEventHandler(this.TxtArchivo_DragDrop);
             this.txtArchivo.DragEnter += new System.Windows.Forms.DragEventHandler(this.TxtArchivo_DragEnter);
@@ -208,7 +196,7 @@
             this.lblAutor.Location = new System.Drawing.Point(40, 25);
             this.lblAutor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 0);
             this.lblAutor.Name = "lblAutor";
-            this.lblAutor.Size = new System.Drawing.Size(65, 22);
+            this.lblAutor.Size = new System.Drawing.Size(83, 27);
             this.lblAutor.TabIndex = 0;
             this.lblAutor.Text = "[Autor]";
             this.lblAutor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -223,6 +211,7 @@
             this.dgvMatrizProducciones.Location = new System.Drawing.Point(767, 193);
             this.dgvMatrizProducciones.Name = "dgvMatrizProducciones";
             this.dgvMatrizProducciones.ReadOnly = true;
+            this.dgvMatrizProducciones.RowHeadersWidth = 51;
             this.dgvMatrizProducciones.Size = new System.Drawing.Size(295, 278);
             this.dgvMatrizProducciones.TabIndex = 12;
             // 
@@ -231,16 +220,28 @@
             this.lblMatrizProducciones.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblMatrizProducciones.AutoSize = true;
             this.lblMatrizProducciones.Font = new System.Drawing.Font("Arial", 14F);
-            this.lblMatrizProducciones.Location = new System.Drawing.Point(811, 168);
+            this.lblMatrizProducciones.Location = new System.Drawing.Point(784, 163);
             this.lblMatrizProducciones.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMatrizProducciones.Name = "lblMatrizProducciones";
-            this.lblMatrizProducciones.Size = new System.Drawing.Size(206, 22);
+            this.lblMatrizProducciones.Size = new System.Drawing.Size(261, 27);
             this.lblMatrizProducciones.TabIndex = 13;
             this.lblMatrizProducciones.Text = "Matriz de producciones";
             // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnLimpiar.Location = new System.Drawing.Point(40, 577);
+            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(109, 36);
+            this.btnLimpiar.TabIndex = 10;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.BtnLimpiar_Click);
+            // 
             // FrmPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1106, 640);
             this.Controls.Add(this.tlpPrincipal);
