@@ -15,13 +15,13 @@ namespace LaboratorioCompiladores.Clases
         private List<string> terminales = new List<string>();
         private List<string[]> matrizProducciones = new List<string[]>();
         
-        private void CargarContenido(List<String> lista, TextBox tx)
+        private void CargarContenido(List<String> lista, DataGridView dgv)
         {
             if (lista.Count > 0)
             {
                 foreach (String elemento in lista)
                 {
-                    tx.Text += $"{elemento}\r\n";
+                    dgv.Rows.Add(elemento);
                 }
             }
         }
@@ -38,7 +38,7 @@ namespace LaboratorioCompiladores.Clases
             return false;
         }
 
-        public void DistribuirContenido(TextBox txtContenido, TextBox txtVariables, TextBox txtTerminales, Label lblTotalVariables, Label lblTotalTerminales)
+        public void DistribuirContenido(TextBox txtContenido, DataGridView dgvVariables, DataGridView dgvTerminales)
         {
             try {
                 Regex regex;
@@ -91,12 +91,14 @@ namespace LaboratorioCompiladores.Clases
                 {
                     terminales.Add("e");
                 }
-                CargarContenido(variables, txtVariables);
-                CargarContenido(terminales, txtTerminales);
-                lblTotalVariables.Text += $" [{variables.Count}]";
-                lblTotalTerminales.Text += $" [{terminales.Count}]";
-                lblTotalVariables.Visible = true;
-                lblTotalTerminales.Visible = true;
+                CargarContenido(variables, dgvVariables);
+                CargarContenido(terminales, dgvTerminales);
+                dgvVariables.Columns[0].HeaderText = $"Variables [{variables.Count}]";
+                dgvTerminales.Columns[0].HeaderText = $"Terminales [{terminales.Count}]";
+                dgvVariables.AutoResizeColumn(0, DataGridViewAutoSizeColumnMode.DisplayedCells);
+                dgvVariables.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dgvTerminales.AutoResizeColumn(0, DataGridViewAutoSizeColumnMode.DisplayedCells);
+                dgvTerminales.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
             catch(Exception ex)
             {
@@ -108,25 +110,27 @@ namespace LaboratorioCompiladores.Clases
         {
             try
             {
-                matrizProducciones.Add(new string[] {"Variable", "Producción" });
+                matrizProducciones.Clear();
+                matrizProducciones.Add(new string[] {"Variable"});
                 foreach(string linea in txt.Lines)
                 {
                     if (linea.Length > 0)
                     {
-                        string[] subcadenas;
-                        subcadenas = linea.Split(new String[] { "=" }, StringSplitOptions.None);
-                        if (subcadenas.Length == 2)
+                        string[] subcadena;
+                        subcadena = linea.Split(new String[] { "=" }, StringSplitOptions.None);
+                        if (subcadena.Length == 2)
                         {
                             string[] producciones;
-                            subcadenas[0].Trim();
-                            subcadenas[1].Trim();
-                            producciones = subcadenas[1].Split(new String[] { "|" }, StringSplitOptions.None);
+                            subcadena[0].Trim();
+                            subcadena[1].Trim();
+                            producciones = subcadena[1].Split(new String[] { "|" }, StringSplitOptions.None);
 
                             foreach (string produccion in producciones)
                             {
-                                if(!EncontrarProduccion(matrizProducciones, subcadenas[0], produccion))
+                                if(!EncontrarProduccion(matrizProducciones, subcadena[0], produccion))
                                 {
-                                    matrizProducciones.Add(new string[] { subcadenas[0], produccion });
+
+                                    matrizProducciones.Add(new string[] { subcadena[0], produccion });
                                 }
                             }
                         }
@@ -134,14 +138,45 @@ namespace LaboratorioCompiladores.Clases
                 }
                 //Se adapta la matriz de producciones a un datatable para utilizar en la interfaz
                 DataTable dt = new DataTable();
-                foreach(string columna in matrizProducciones[0])
+                //foreach(string columna in matrizProducciones[0])
+                //{
+                //    dt.Columns.Add(columna);
+                //}
+                int columnas = 0;
+                int maximoColumnas = 0;
+                int actual = 0;
+                for(int i = 0; i < matrizProducciones.Count; i++)
                 {
-                    dt.Columns.Add(columna);
-                }
-
-                for(int i = 1; i < matrizProducciones.Count; i++)
-                {
-                    dt.Rows.Add(matrizProducciones[i].ToArray());
+                    DataRow fila = dt.NewRow();
+                    if (matrizProducciones[i].Length == 2)
+                    {
+                        string[] posicion = matrizProducciones[i][1].Split(' ');
+                        actual = (posicion.Length + 1);
+                        if(actual > maximoColumnas)
+                        {
+                            while(columnas == maximoColumnas)
+                            {
+                                dt.Columns.Add(String.Empty);
+                                columnas++;
+                            }
+                            maximoColumnas = actual;
+                        }
+                        int posicionFila = 0;
+                        
+                        fila[posicionFila] = matrizProducciones[i][1];
+                        posicionFila++;
+                        for(int val = 0; val < posicion.Length; val++)
+                        {
+                            fila[posicionFila] = posicion[val];
+                            posicionFila++;
+                        }
+                    }
+                    else
+                    {
+                        fila[0] = matrizProducciones[i][0];
+                    }
+                    
+                    dt.Rows.Add(fila);
                 }
 
                 dgv.DataSource = dt;
@@ -184,6 +219,64 @@ namespace LaboratorioCompiladores.Clases
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+       
+        public void RemoverRecursividad(TextBox entrada, TextBox salida)
+        {
+            string[] lineas= entrada.Text.Split('\n');
+            foreach (string linea in lineas)
+            {
+                linea.TrimEnd('\r');
+                linea.Trim();
+                if(linea.Length > 0)
+                {
+                    string[] partes = linea.Split(new string[] { "=" }, StringSplitOptions.None);
+                    string izquierda = partes[0].Trim();
+                    string[] partesDerecha = partes[1].Split('|');
+                    List<string> noRecursiva = new List<string>();
+                    List<string> recursiva = new List<string>();
+                    foreach (string derecha in partesDerecha)
+                    {
+                        if (derecha.Trim().StartsWith(izquierda))
+                        {
+                            recursiva.Add(derecha.Trim().Substring(izquierda.Length));
+                        }
+                        else
+                        {
+                            noRecursiva.Add(derecha.Trim());
+                        }
+                    }
+                    if (recursiva.Count > 0)
+                    {
+                        if (noRecursiva.Count > 0)
+                        {
+                            salida.AppendText(izquierda + "=");
+                            for (int i = 0; i < noRecursiva.Count; i++)
+                            {
+                                salida.AppendText($"{noRecursiva[i]}{izquierda}1");
+                                if (i < noRecursiva.Count - 1)
+                                {
+                                    salida.AppendText("|");
+                                }
+                            }
+                            salida.AppendText("\r\n");
+                        }
+                        salida.AppendText($"{izquierda}1=");
+                        for (int i = 0; i < recursiva.Count; i++)
+                        {
+                            salida.AppendText($"{recursiva[i]}{izquierda}1|e");
+                            if (i < recursiva.Count - 1)
+                            {
+                                salida.AppendText("|");
+                            }
+                        }
+                        salida.AppendText("\r\n");
+                    }
+                    else
+                    {
+                        salida.AppendText(linea + "\r\n");
+                    }
+                }
+            }
+        }
     }
 }
