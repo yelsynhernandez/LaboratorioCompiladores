@@ -107,7 +107,7 @@ namespace LaboratorioCompiladores.Clases
             }
         }
 
-        public void GenerarMatrizProducciones(TextBox txt, DataGridView dgv)
+        public void GenerarMatrizProducciones(TextBox txt, DataGridView dgv, Label lbl)
         {
             try
             {
@@ -216,9 +216,12 @@ namespace LaboratorioCompiladores.Clases
                 style.ForeColor = ColorTranslator.FromHtml("#212529");
                 dgv.DefaultCellStyle = style;
 
-                dgv.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#00509d");
-                dgv.ColumnHeadersDefaultCellStyle.ForeColor = ColorTranslator.FromHtml("#CED4DA");
+                dgv.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#BFC2C4");
+                dgv.ColumnHeadersDefaultCellStyle.ForeColor = ColorTranslator.FromHtml("#000000");
                 dgv.EnableHeadersVisualStyles = false;
+
+
+                lbl.Text += $" [{dgv.RowCount}]";
 
             }
             catch(Exception ex)
