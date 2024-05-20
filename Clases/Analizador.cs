@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 using System.Data;
 using System.Linq;
 using System.Drawing;
+using System.Runtime.Serialization.Formatters;
 
 namespace LaboratorioCompiladores.Clases
 {
@@ -111,7 +112,6 @@ namespace LaboratorioCompiladores.Clases
             try
             {
                 matrizProducciones.Clear();
-                matrizProducciones.Add(new string[] {"Variable"});
                 foreach(string linea in txt.Lines)
                 {
                     if (linea.Length > 0)
@@ -136,16 +136,13 @@ namespace LaboratorioCompiladores.Clases
                         }
                     }
                 }
-                //Se adapta la matriz de producciones a un datatable para utilizar en la interfaz
+
                 DataTable dt = new DataTable();
-                //foreach(string columna in matrizProducciones[0])
-                //{
-                //    dt.Columns.Add(columna);
-                //}
-                int columnas = 0;
+                int columnas = 1;
                 int maximoColumnas = 0;
                 int actual = 0;
-                for(int i = 0; i < matrizProducciones.Count; i++)
+                dt.Columns.Add(String.Empty);
+                for (int i = 0; i < matrizProducciones.Count; i++)
                 {
                     DataRow fila = dt.NewRow();
                     if (matrizProducciones[i].Length == 2)
@@ -154,21 +151,25 @@ namespace LaboratorioCompiladores.Clases
                         actual = (posicion.Length + 1);
                         if(actual > maximoColumnas)
                         {
-                            while(columnas == maximoColumnas)
+                            maximoColumnas = actual;
+                            while (columnas < maximoColumnas)
                             {
                                 dt.Columns.Add(String.Empty);
                                 columnas++;
                             }
-                            maximoColumnas = actual;
                         }
                         int posicionFila = 0;
-                        
-                        fila[posicionFila] = matrizProducciones[i][1];
+                        fila[posicionFila] = matrizProducciones[i][0];
                         posicionFila++;
                         for(int val = 0; val < posicion.Length; val++)
                         {
-                            fila[posicionFila] = posicion[val];
-                            posicionFila++;
+                            string dato = posicion[val].Replace("'", string.Empty);
+                            if (dato.Length > 0)
+                            {
+                                dato = dato.Trim();
+                                fila[posicionFila] = dato;
+                                posicionFila++;
+                            }
                         }
                     }
                     else
@@ -180,6 +181,12 @@ namespace LaboratorioCompiladores.Clases
                 }
 
                 dgv.DataSource = dt;
+                foreach(DataGridViewColumn columna in dgv.Columns)
+                {
+                    columna.HeaderText = String.Empty;
+                }
+                dgv.Columns[0].HeaderText = "Variable";
+
 
                 //Configuracion visual de la tabla
                 DataGridViewCellStyle style = new DataGridViewCellStyle();
@@ -252,7 +259,7 @@ namespace LaboratorioCompiladores.Clases
                             salida.AppendText(izquierda + "=");
                             for (int i = 0; i < noRecursiva.Count; i++)
                             {
-                                salida.AppendText($"{noRecursiva[i]}{izquierda}1");
+                                salida.AppendText($"{noRecursiva[i]} {izquierda}1");
                                 if (i < noRecursiva.Count - 1)
                                 {
                                     salida.AppendText("|");
@@ -263,7 +270,7 @@ namespace LaboratorioCompiladores.Clases
                         salida.AppendText($"{izquierda}1=");
                         for (int i = 0; i < recursiva.Count; i++)
                         {
-                            salida.AppendText($"{recursiva[i]}{izquierda}1|e");
+                            salida.AppendText($"{recursiva[i]} {izquierda}1|e");
                             if (i < recursiva.Count - 1)
                             {
                                 salida.AppendText("|");

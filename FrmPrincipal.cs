@@ -124,8 +124,11 @@ namespace LaboratorioCompiladores
         private void LimpiarControles()
         {
             txtContenidoArchivo.Clear();
+            txtGramaticaSinRecursividad.Clear();
+
             dgvVariablesRecursivas.DataSource = null;
             dgvTerminalesRecursivas.DataSource = null;
+            
             dgvVariablesRecursivas.Columns[0].HeaderText = "Variables";
             dgvTerminalesRecursivas.Columns[0].HeaderText = "Terminales";
             dgvVariablesSinRecursividad.Columns[0].HeaderText = "Variables";
