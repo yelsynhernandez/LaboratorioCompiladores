@@ -85,6 +85,7 @@ namespace LaboratorioCompiladores
                     analizador.RemoverRecursividad(txtContenidoArchivo, txtGramaticaSinRecursividad);
                     analizador.DistribuirContenido(txtGramaticaSinRecursividad, dgvVariablesSinRecursividad, dgvTerminalesSinRecursividad);
                     analizador.GenerarMatrizProducciones(txtGramaticaSinRecursividad, dgvMatrizProduccionesSinRecursividad);
+
                 }
                 else
                 {

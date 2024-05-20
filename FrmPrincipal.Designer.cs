@@ -163,6 +163,7 @@
             this.dgvFuncionSiguiente.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvFuncionSiguiente.Name = "dgvFuncionSiguiente";
             this.dgvFuncionSiguiente.ReadOnly = true;
+            this.dgvFuncionSiguiente.RowHeadersWidth = 51;
             this.dgvFuncionSiguiente.Size = new System.Drawing.Size(155, 211);
             this.dgvFuncionSiguiente.TabIndex = 27;
             // 
@@ -180,6 +181,7 @@
             this.dgvFuncionPrimera.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvFuncionPrimera.Name = "dgvFuncionPrimera";
             this.dgvFuncionPrimera.ReadOnly = true;
+            this.dgvFuncionPrimera.RowHeadersWidth = 51;
             this.dgvFuncionPrimera.Size = new System.Drawing.Size(155, 211);
             this.dgvFuncionPrimera.TabIndex = 26;
             // 
@@ -198,14 +200,17 @@
             this.dgvTerminalesSinRecursividad.Name = "dgvTerminalesSinRecursividad";
             this.dgvTerminalesSinRecursividad.ReadOnly = true;
             this.dgvTerminalesSinRecursividad.RowHeadersVisible = false;
+            this.dgvTerminalesSinRecursividad.RowHeadersWidth = 51;
             this.dgvTerminalesSinRecursividad.Size = new System.Drawing.Size(104, 209);
             this.dgvTerminalesSinRecursividad.TabIndex = 25;
             // 
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.HeaderText = "Terminal";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 125;
             // 
             // dgvVariablesSinRecursividad
             // 
@@ -222,14 +227,17 @@
             this.dgvVariablesSinRecursividad.Name = "dgvVariablesSinRecursividad";
             this.dgvVariablesSinRecursividad.ReadOnly = true;
             this.dgvVariablesSinRecursividad.RowHeadersVisible = false;
+            this.dgvVariablesSinRecursividad.RowHeadersWidth = 51;
             this.dgvVariablesSinRecursividad.Size = new System.Drawing.Size(104, 209);
             this.dgvVariablesSinRecursividad.TabIndex = 24;
             // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.HeaderText = "Variable";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 125;
             // 
             // txtArchivo
             // 
@@ -242,7 +250,7 @@
             this.txtArchivo.Margin = new System.Windows.Forms.Padding(4, 8, 4, 2);
             this.txtArchivo.Name = "txtArchivo";
             this.txtArchivo.ReadOnly = true;
-            this.txtArchivo.Size = new System.Drawing.Size(978, 29);
+            this.txtArchivo.Size = new System.Drawing.Size(978, 34);
             this.txtArchivo.TabIndex = 1;
             this.txtArchivo.DragDrop += new System.Windows.Forms.DragEventHandler(this.TxtArchivo_DragDrop);
             this.txtArchivo.DragEnter += new System.Windows.Forms.DragEventHandler(this.TxtArchivo_DragEnter);
@@ -255,7 +263,7 @@
             this.lblAutor.Location = new System.Drawing.Point(26, 15);
             this.lblAutor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 0);
             this.lblAutor.Name = "lblAutor";
-            this.lblAutor.Size = new System.Drawing.Size(65, 21);
+            this.lblAutor.Size = new System.Drawing.Size(84, 25);
             this.lblAutor.TabIndex = 0;
             this.lblAutor.Text = "[Autor]";
             this.lblAutor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -291,10 +299,10 @@
             this.lblGramaticaNoRecursiva.AutoSize = true;
             this.tlpPrincipal.SetColumnSpan(this.lblGramaticaNoRecursiva, 7);
             this.lblGramaticaNoRecursiva.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGramaticaNoRecursiva.Location = new System.Drawing.Point(271, 376);
+            this.lblGramaticaNoRecursiva.Location = new System.Drawing.Point(253, 370);
             this.lblGramaticaNoRecursiva.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblGramaticaNoRecursiva.Name = "lblGramaticaNoRecursiva";
-            this.lblGramaticaNoRecursiva.Size = new System.Drawing.Size(130, 21);
+            this.lblGramaticaNoRecursiva.Size = new System.Drawing.Size(166, 27);
             this.lblGramaticaNoRecursiva.TabIndex = 14;
             this.lblGramaticaNoRecursiva.Text = "Sin recursividad";
             // 
@@ -312,6 +320,7 @@
             this.dgvMatrizProducciones.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvMatrizProducciones.Name = "dgvMatrizProducciones";
             this.dgvMatrizProducciones.ReadOnly = true;
+            this.dgvMatrizProducciones.RowHeadersWidth = 51;
             this.dgvMatrizProducciones.Size = new System.Drawing.Size(224, 211);
             this.dgvMatrizProducciones.TabIndex = 12;
             // 
@@ -320,10 +329,10 @@
             this.lblContenidoArchivo.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblContenidoArchivo.AutoSize = true;
             this.lblContenidoArchivo.Font = new System.Drawing.Font("Times New Roman", 10.5F, System.Drawing.FontStyle.Bold);
-            this.lblContenidoArchivo.Location = new System.Drawing.Point(41, 115);
+            this.lblContenidoArchivo.Location = new System.Drawing.Point(28, 115);
             this.lblContenidoArchivo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblContenidoArchivo.Name = "lblContenidoArchivo";
-            this.lblContenidoArchivo.Size = new System.Drawing.Size(97, 33);
+            this.lblContenidoArchivo.Size = new System.Drawing.Size(124, 33);
             this.lblContenidoArchivo.TabIndex = 2;
             this.lblContenidoArchivo.Text = "Contenido del Archivo";
             // 
@@ -332,10 +341,10 @@
             this.lblVariablesNoRecursivas.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblVariablesNoRecursivas.AutoSize = true;
             this.lblVariablesNoRecursivas.Font = new System.Drawing.Font("Times New Roman", 14F);
-            this.lblVariablesNoRecursivas.Location = new System.Drawing.Point(659, 94);
+            this.lblVariablesNoRecursivas.Location = new System.Drawing.Point(659, 88);
             this.lblVariablesNoRecursivas.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVariablesNoRecursivas.Name = "lblVariablesNoRecursivas";
-            this.lblVariablesNoRecursivas.Size = new System.Drawing.Size(0, 21);
+            this.lblVariablesNoRecursivas.Size = new System.Drawing.Size(0, 27);
             this.lblVariablesNoRecursivas.TabIndex = 16;
             // 
             // lblGramaticaRecursiva
@@ -344,10 +353,10 @@
             this.lblGramaticaRecursiva.AutoSize = true;
             this.tlpPrincipal.SetColumnSpan(this.lblGramaticaRecursiva, 7);
             this.lblGramaticaRecursiva.Font = new System.Drawing.Font("Times New Roman", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGramaticaRecursiva.Location = new System.Drawing.Point(179, 93);
+            this.lblGramaticaRecursiva.Location = new System.Drawing.Point(140, 89);
             this.lblGramaticaRecursiva.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblGramaticaRecursiva.Name = "lblGramaticaRecursiva";
-            this.lblGramaticaRecursiva.Size = new System.Drawing.Size(313, 22);
+            this.lblGramaticaRecursiva.Size = new System.Drawing.Size(392, 26);
             this.lblGramaticaRecursiva.TabIndex = 18;
             this.lblGramaticaRecursiva.Text = "Información con gramática recursiva";
             // 
@@ -366,14 +375,17 @@
             this.dgvVariablesRecursivas.Name = "dgvVariablesRecursivas";
             this.dgvVariablesRecursivas.ReadOnly = true;
             this.dgvVariablesRecursivas.RowHeadersVisible = false;
+            this.dgvVariablesRecursivas.RowHeadersWidth = 51;
             this.dgvVariablesRecursivas.Size = new System.Drawing.Size(104, 209);
             this.dgvVariablesRecursivas.TabIndex = 19;
             // 
             // ColumnaVariableRecursiva
             // 
             this.ColumnaVariableRecursiva.HeaderText = "Variable";
+            this.ColumnaVariableRecursiva.MinimumWidth = 6;
             this.ColumnaVariableRecursiva.Name = "ColumnaVariableRecursiva";
             this.ColumnaVariableRecursiva.ReadOnly = true;
+            this.ColumnaVariableRecursiva.Width = 125;
             // 
             // dgvTerminalesRecursivas
             // 
@@ -390,14 +402,17 @@
             this.dgvTerminalesRecursivas.Name = "dgvTerminalesRecursivas";
             this.dgvTerminalesRecursivas.ReadOnly = true;
             this.dgvTerminalesRecursivas.RowHeadersVisible = false;
+            this.dgvTerminalesRecursivas.RowHeadersWidth = 51;
             this.dgvTerminalesRecursivas.Size = new System.Drawing.Size(104, 209);
             this.dgvTerminalesRecursivas.TabIndex = 20;
             // 
             // VariableTerminalRecursiva
             // 
             this.VariableTerminalRecursiva.HeaderText = "Terminal";
+            this.VariableTerminalRecursiva.MinimumWidth = 6;
             this.VariableTerminalRecursiva.Name = "VariableTerminalRecursiva";
             this.VariableTerminalRecursiva.ReadOnly = true;
+            this.VariableTerminalRecursiva.Width = 125;
             // 
             // dgvMatrizProduccionesSinRecursividad
             // 
@@ -413,6 +428,7 @@
             this.dgvMatrizProduccionesSinRecursividad.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvMatrizProduccionesSinRecursividad.Name = "dgvMatrizProduccionesSinRecursividad";
             this.dgvMatrizProduccionesSinRecursividad.ReadOnly = true;
+            this.dgvMatrizProduccionesSinRecursividad.RowHeadersWidth = 51;
             this.dgvMatrizProduccionesSinRecursividad.Size = new System.Drawing.Size(224, 211);
             this.dgvMatrizProduccionesSinRecursividad.TabIndex = 23;
             // 
@@ -421,10 +437,10 @@
             this.lblFuncionPrimero.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblFuncionPrimero.AutoSize = true;
             this.lblFuncionPrimero.Font = new System.Drawing.Font("Times New Roman", 10.5F, System.Drawing.FontStyle.Bold);
-            this.lblFuncionPrimero.Location = new System.Drawing.Point(693, 131);
+            this.lblFuncionPrimero.Location = new System.Drawing.Point(679, 128);
             this.lblFuncionPrimero.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFuncionPrimero.Name = "lblFuncionPrimero";
-            this.lblFuncionPrimero.Size = new System.Drawing.Size(110, 17);
+            this.lblFuncionPrimero.Size = new System.Drawing.Size(138, 20);
             this.lblFuncionPrimero.TabIndex = 28;
             this.lblFuncionPrimero.Text = "Función primero";
             // 
@@ -433,10 +449,10 @@
             this.lblFuncionSiguiente.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblFuncionSiguiente.AutoSize = true;
             this.lblFuncionSiguiente.Font = new System.Drawing.Font("Times New Roman", 10.5F, System.Drawing.FontStyle.Bold);
-            this.lblFuncionSiguiente.Location = new System.Drawing.Point(869, 131);
+            this.lblFuncionSiguiente.Location = new System.Drawing.Point(855, 128);
             this.lblFuncionSiguiente.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFuncionSiguiente.Name = "lblFuncionSiguiente";
-            this.lblFuncionSiguiente.Size = new System.Drawing.Size(117, 17);
+            this.lblFuncionSiguiente.Size = new System.Drawing.Size(144, 20);
             this.lblFuncionSiguiente.TabIndex = 29;
             this.lblFuncionSiguiente.Text = "Función siguiente";
             // 
@@ -455,6 +471,7 @@
             this.dgvTablaSimbolos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvTablaSimbolos.Name = "dgvTablaSimbolos";
             this.dgvTablaSimbolos.ReadOnly = true;
+            this.dgvTablaSimbolos.RowHeadersWidth = 51;
             this.dgvTablaSimbolos.Size = new System.Drawing.Size(334, 211);
             this.dgvTablaSimbolos.TabIndex = 30;
             // 
@@ -464,16 +481,16 @@
             this.lblTablaSimbolos.AutoSize = true;
             this.tlpPrincipal.SetColumnSpan(this.lblTablaSimbolos, 3);
             this.lblTablaSimbolos.Font = new System.Drawing.Font("Times New Roman", 10.5F, System.Drawing.FontStyle.Bold);
-            this.lblTablaSimbolos.Location = new System.Drawing.Point(780, 380);
+            this.lblTablaSimbolos.Location = new System.Drawing.Point(764, 377);
             this.lblTablaSimbolos.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTablaSimbolos.Name = "lblTablaSimbolos";
-            this.lblTablaSimbolos.Size = new System.Drawing.Size(115, 17);
+            this.lblTablaSimbolos.Size = new System.Drawing.Size(148, 20);
             this.lblTablaSimbolos.TabIndex = 31;
             this.lblTablaSimbolos.Text = "Tabla de símbolos";
             // 
             // FrmPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1036, 661);
             this.Controls.Add(this.tlpPrincipal);

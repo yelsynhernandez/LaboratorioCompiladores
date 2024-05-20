@@ -129,8 +129,7 @@ namespace LaboratorioCompiladores.Clases
                             {
                                 if(!EncontrarProduccion(matrizProducciones, subcadena[0], produccion))
                                 {
-
-                                    matrizProducciones.Add(new string[] { subcadena[0], produccion });
+                                    matrizProducciones.Add(new string[] { subcadena[0], produccion});
                                 }
                             }
                         }
@@ -148,7 +147,7 @@ namespace LaboratorioCompiladores.Clases
                     if (matrizProducciones[i].Length == 2)
                     {
                         string[] posicion = matrizProducciones[i][1].Split(' ');
-                        actual = (posicion.Length + 1);
+                        actual = posicion.Length + 1;
                         if(actual > maximoColumnas)
                         {
                             maximoColumnas = actual;
@@ -176,7 +175,6 @@ namespace LaboratorioCompiladores.Clases
                     {
                         fila[0] = matrizProducciones[i][0];
                     }
-                    
                     dt.Rows.Add(fila);
                 }
 
@@ -255,7 +253,7 @@ namespace LaboratorioCompiladores.Clases
                     {
                         if (noRecursiva.Count > 0)
                         {
-                            salida.AppendText(izquierda + "=");
+                            salida.AppendText($"{izquierda}=");
                             for (int i = 0; i < noRecursiva.Count; i++)
                             {
                                 salida.AppendText($"{noRecursiva[i]} {izquierda}1");
@@ -269,7 +267,7 @@ namespace LaboratorioCompiladores.Clases
                         salida.AppendText($"{izquierda}1=");
                         for (int i = 0; i < recursiva.Count; i++)
                         {
-                            salida.AppendText($"{recursiva[i]} {izquierda}1|e");
+                            salida.AppendText($"{recursiva[i].Trim()} {izquierda}1|e");
                             if (i < recursiva.Count - 1)
                             {
                                 salida.AppendText("|");
@@ -283,6 +281,11 @@ namespace LaboratorioCompiladores.Clases
                     }
                 }
             }
+        }
+
+        public void FuncionPrimero()
+        {
+
         }
     }
 }
