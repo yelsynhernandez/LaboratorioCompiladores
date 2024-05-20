@@ -107,7 +107,7 @@ namespace LaboratorioCompiladores.Clases
             }
         }
 
-        public void GenerarMatrizProducciones(TextBox txt, DataGridView dgv, Label lbl)
+        public void GenerarMatrizProducciones(TextBox txt, DataGridView dgv)
         {
             try
             {
@@ -219,10 +219,6 @@ namespace LaboratorioCompiladores.Clases
                 dgv.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#BFC2C4");
                 dgv.ColumnHeadersDefaultCellStyle.ForeColor = ColorTranslator.FromHtml("#000000");
                 dgv.EnableHeadersVisualStyles = false;
-
-
-                lbl.Text += $" [{dgv.RowCount}]";
-
             }
             catch(Exception ex)
             {
