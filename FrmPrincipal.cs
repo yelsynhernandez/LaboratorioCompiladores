@@ -79,13 +79,13 @@ namespace LaboratorioCompiladores
                     }
                     txtContenidoArchivo.Text.TrimEnd('\r','\n');
                     Analizador analizador = new Analizador();
-                    analizador.DistribuirContenido(txtContenidoArchivo, dgvVariablesRecursivas, dgvTerminalesRecursivas);
-                    analizador.GenerarMatrizProducciones(txtContenidoArchivo, dgvMatrizProducciones);
+                    analizador.DistribuirContenido(txtContenidoArchivo, dgvVariables, dgvTerminales);
+                    analizador.GenerarMatrizProducciones(txtContenidoArchivo, dgvProducciones);
                     //Sin recursividad
                     analizador.RemoverRecursividad(txtContenidoArchivo, txtGramaticaSinRecursividad);
                     analizador.DistribuirContenido(txtGramaticaSinRecursividad, dgvVariablesSinRecursividad, dgvTerminalesSinRecursividad);
-                    analizador.GenerarMatrizProducciones(txtGramaticaSinRecursividad, dgvMatrizProduccionesSinRecursividad);
-
+                    analizador.GenerarMatrizProducciones(txtGramaticaSinRecursividad, dgvProduccionesSinRecursividad);
+                    analizador.FuncionPrimero(dgvProduccionesSinRecursividad, dgvTerminalesSinRecursividad, dgvProduccionesSinRecursividad);
                 }
                 else
                 {
@@ -127,11 +127,11 @@ namespace LaboratorioCompiladores
             txtContenidoArchivo.Clear();
             txtGramaticaSinRecursividad.Clear();
 
-            dgvVariablesRecursivas.DataSource = null;
-            dgvTerminalesRecursivas.DataSource = null;
+            dgvVariables.DataSource = null;
+            dgvTerminales.DataSource = null;
             
-            dgvVariablesRecursivas.Columns[0].HeaderText = "Variables";
-            dgvTerminalesRecursivas.Columns[0].HeaderText = "Terminales";
+            dgvVariables.Columns[0].HeaderText = "Variables";
+            dgvTerminales.Columns[0].HeaderText = "Terminales";
             dgvVariablesSinRecursividad.Columns[0].HeaderText = "Variables";
             dgvTerminalesSinRecursividad.Columns[0].HeaderText = "Terminales";
             TextoDefecto(true);

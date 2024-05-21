@@ -282,10 +282,37 @@ namespace LaboratorioCompiladores.Clases
                 }
             }
         }
-
-        public void FuncionPrimero()
+        private bool Buscar(DataGridView dgv, string valorBuscado)
         {
-
+            foreach (DataGridViewRow fila in dgv.Rows)
+            {
+                if (fila.Cells[1].Value != null && 
+                    fila.Cells[1].Value.ToString().Trim() == valorBuscado.Trim())
+                {
+                    return true;
+                }
+            }
+            return false;
         }
+
+        public void FuncionPrimero(DataGridView gramatica, DataGridView terminales, DataGridView producciones)
+        {
+            List<string> resultado = new List<string>();
+            for(int i = 0; i < gramatica.Rows.Count; i++)
+            {
+                string primerPosicion = gramatica.Rows[i].Cells[1].Value?.ToString();
+                //Es terminal?
+                if(Buscar(terminales, primerPosicion))
+                {
+                    resultado.Add(primerPosicion);
+                }
+
+                if(Buscar(producciones, primerPosicion))
+                {
+                    resultado.Add("");
+                }
+            }
+        }
+
     }
 }
