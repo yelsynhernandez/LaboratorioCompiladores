@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Drawing;
 using System.Runtime.Serialization.Formatters;
+using System.Text;
 
 namespace LaboratorioCompiladores.Clases
 {
@@ -282,12 +283,57 @@ namespace LaboratorioCompiladores.Clases
                 }
             }
         }
+
+        public string AjustarGramatica(string contenido)
+        {
+            string[] lineas = contenido.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            Dictionary<string, List<string>> producciones = new Dictionary<string, List<string>>();
+
+            foreach (string linea in lineas)
+            {
+                string[] partes = linea.Split('=');
+                string variable = partes[0].Trim();
+                string produccion = partes[1].Trim();
+
+                if (!producciones.ContainsKey(variable))
+                {
+                    producciones[variable] = new List<string>();
+                }
+                producciones[variable].Add(produccion);
+            }
+
+            // Ordenar las variables según el orden específico deseado
+            var ordenVariables = new List<string> { "S", "S1", "T", "T1", "F" };
+            var variablesOrdenadas = producciones.Keys
+                .OrderBy(v => ordenVariables.IndexOf(v))
+                .ToList();
+
+            StringBuilder resultado = new StringBuilder();
+
+            foreach (string variable in variablesOrdenadas)
+            {
+                List<string> listaProducciones = producciones[variable];
+
+                // Agrupar producciones y eliminar duplicados
+                var produccionesAgrupadas = listaProducciones
+                    .SelectMany(p => p.Split('|'))
+                    .Distinct()
+                    .OrderBy(p => p == "e" ? 1 : 0)
+                    .ThenBy(p => p)
+                    .ToList();
+
+                resultado.AppendLine($"{variable}={string.Join("|", produccionesAgrupadas)}");
+            }
+
+            return resultado.ToString();
+        }
+
         private bool Buscar(DataGridView dgv, string valorBuscado)
         {
             foreach (DataGridViewRow fila in dgv.Rows)
             {
-                if (fila.Cells[1].Value != null && 
-                    fila.Cells[1].Value.ToString().Trim() == valorBuscado.Trim())
+                if (fila.Cells[0].Value != null && 
+                    fila.Cells[0].Value.ToString().Trim() == valorBuscado)
                 {
                     return true;
                 }
@@ -295,13 +341,35 @@ namespace LaboratorioCompiladores.Clases
             return false;
         }
 
-        public void FuncionPrimero(DataGridView gramatica, DataGridView terminales, DataGridView producciones)
+        public void FuncionPrimero(DataGridView gramatica, DataGridView terminales, DataGridView producciones, DataGridView produccionesFuncionPrimero)
         {
-            List<string> resultado = new List<string>();
-            for(int i = 0; i < gramatica.Rows.Count; i++)
+            List<string> filas = new List<string>();
+            string stringFila;
+
+            string primerPosicion;
+            string variable;
+            string variableAnterior = null;
+            for (int i = 0;i < gramatica.Rows.Count; i++)
             {
-                string primerPosicion = gramatica.Rows[i].Cells[1].Value?.ToString();
-                //Es terminal?
+                variable = gramatica.Rows[i].Cells[0].Value.ToString().Trim();
+                //Asignamos la primer columna a la variable
+                stringFila = $"{variable},";
+
+
+                primerPosicion = gramatica.Rows[i].Cells[1].Value.ToString().Trim();
+                //es terminal?
+                if(Buscar(terminales, primerPosicion))
+                {
+                    stringFila += $"{primerPosicion},";
+                }
+
+                if (variableAnterior != null && (variable == variableAnterior))
+                {
+                    Console.WriteLine($"Analizando la misma variable [{variable}]/[{variableAnterior}]");
+                }
+
+                /*string primerPosicion = gramatica.Rows[i].Cells[1].Value?.ToString();
+                
                 if(Buscar(terminales, primerPosicion))
                 {
                     resultado.Add(primerPosicion);
@@ -310,8 +378,45 @@ namespace LaboratorioCompiladores.Clases
                 if(Buscar(producciones, primerPosicion))
                 {
                     resultado.Add("");
+                }*/
+                variableAnterior = variable;
+                //Agregamos a la lista de producciones, removiendo la última coma
+                filas.Add(stringFila.Remove(stringFila.Length - 1));
+            }
+
+            //Despues de generarse las producciones de la funcion "primero", dimensionamos la informacion para cargarla
+            DataTable dt = new DataTable();
+            int columnas = 0;
+            int maximoColumnas = 0;
+            
+            for(int i = 0; i < filas.Count; i++)
+            {
+                string[] cantidad = filas[i].Split(',');
+                if(cantidad.Length > columnas)
+                {
+                    maximoColumnas = cantidad.Length;
+                    while(columnas < maximoColumnas)
+                    {
+                        dt.Columns.Add(String.Empty);
+                        columnas++;
+                    }
+                }
+
+                for(int valorFila = 0; valorFila < cantidad.Length; valorFila++)
+                {
+                    DataRow dr = dt.NewRow();
+                    dr[valorFila] = filas[valorFila];
+                    dt.Rows.Add(dr);
                 }
             }
+
+            for(int i = 0; i < produccionesFuncionPrimero.Columns.Count; i++)
+            {
+                produccionesFuncionPrimero.Columns[i].HeaderText = String.Empty;
+            }
+
+            produccionesFuncionPrimero.DataSource = dt;
+            produccionesFuncionPrimero.Columns[0].HeaderText = "Variable";
         }
 
     }

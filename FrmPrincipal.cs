@@ -79,13 +79,17 @@ namespace LaboratorioCompiladores
                     }
                     txtContenidoArchivo.Text.TrimEnd('\r','\n');
                     Analizador analizador = new Analizador();
+                    //Con recursividad
                     analizador.DistribuirContenido(txtContenidoArchivo, dgvVariables, dgvTerminales);
                     analizador.GenerarMatrizProducciones(txtContenidoArchivo, dgvProducciones);
+                    
                     //Sin recursividad
                     analizador.RemoverRecursividad(txtContenidoArchivo, txtGramaticaSinRecursividad);
                     analizador.DistribuirContenido(txtGramaticaSinRecursividad, dgvVariablesSinRecursividad, dgvTerminalesSinRecursividad);
+                    string gramaticaAjustada = analizador.AjustarGramatica(txtGramaticaSinRecursividad.Text);
+                    txtGramaticaSinRecursividad.Text = gramaticaAjustada;
                     analizador.GenerarMatrizProducciones(txtGramaticaSinRecursividad, dgvProduccionesSinRecursividad);
-                    analizador.FuncionPrimero(dgvProduccionesSinRecursividad, dgvTerminalesSinRecursividad, dgvProduccionesSinRecursividad);
+                    analizador.FuncionPrimero(dgvProduccionesSinRecursividad, dgvTerminalesSinRecursividad, dgvProduccionesSinRecursividad, dgvFuncionPrimero);
                 }
                 else
                 {
@@ -106,7 +110,7 @@ namespace LaboratorioCompiladores
         private void TextoDefecto(bool defecto)
         {
             string fuente = "Arial";
-            float tamanio = 13F;
+            float tamanio = 14F;
 
             if (defecto)
             {
@@ -127,8 +131,16 @@ namespace LaboratorioCompiladores
             txtContenidoArchivo.Clear();
             txtGramaticaSinRecursividad.Clear();
 
-            dgvVariables.DataSource = null;
-            dgvTerminales.DataSource = null;
+            dgvVariables.Rows.Clear();
+            dgvTerminales.Rows.Clear();
+            dgvVariablesSinRecursividad.Rows.Clear();
+            dgvTerminalesSinRecursividad.Rows.Clear();
+            dgvProducciones.DataSource = null;
+            dgvProduccionesSinRecursividad.DataSource = null;
+            dgvFuncionPrimero.Rows.Clear();
+            dgvFuncionSiguiente.Rows.Clear();
+            dgvTablaSimbolos.Rows.Clear();
+            
             
             dgvVariables.Columns[0].HeaderText = "Variables";
             dgvTerminales.Columns[0].HeaderText = "Terminales";
