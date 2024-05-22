@@ -2,11 +2,8 @@
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Xml.Serialization;
 using System.Data;
 using System.Linq;
-using System.Drawing;
-using System.Runtime.Serialization.Formatters;
 using System.Text;
 
 namespace LaboratorioCompiladores.Clases
@@ -16,6 +13,7 @@ namespace LaboratorioCompiladores.Clases
         private List<string> variables = new List<string>();
         private List<string> terminales = new List<string>();
         private List<string[]> matrizProducciones = new List<string[]>();
+        Ajuste ajuste = new Ajuste();
         
         private void CargarContenido(List<String> lista, DataGridView dgv)
         {
@@ -180,44 +178,7 @@ namespace LaboratorioCompiladores.Clases
                 }
 
                 dgv.DataSource = dt;
-                foreach(DataGridViewColumn columna in dgv.Columns)
-                {
-                    columna.HeaderText = String.Empty;
-                }
-                dgv.Columns[0].HeaderText = "Variable";
-
-
-                //Configuracion visual de la tabla
-                DataGridViewCellStyle style = new DataGridViewCellStyle();
-
-                dgv.AutoResizeColumn(0, DataGridViewAutoSizeColumnMode.DisplayedCells);
-                dgv.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
-
-                for (int columna = 1; columna < dgv.ColumnCount; columna++)
-                {
-                    dgv.Columns[columna].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    dgv.Columns[columna].SortMode = DataGridViewColumnSortMode.NotSortable;
-                }
-                for (int fila = 0; fila < dgv.Rows.Count; fila++)
-                {
-                    if (fila % 2 == 0)
-                    {
-                        dgv.Rows[fila].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#E9ECEF");
-                    }
-                    else
-                    {
-                        dgv.Rows[fila].DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#CED4DA");
-                    }
-                }
-
-                dgv.RowHeadersVisible = false;
-
-                style.ForeColor = ColorTranslator.FromHtml("#212529");
-                dgv.DefaultCellStyle = style;
-
-                dgv.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#BFC2C4");
-                dgv.ColumnHeadersDefaultCellStyle.ForeColor = ColorTranslator.FromHtml("#000000");
-                dgv.EnableHeadersVisualStyles = false;
+                ajuste.FormatoDataGrid(dgv);
             }
             catch(Exception ex)
             {
@@ -387,36 +348,29 @@ namespace LaboratorioCompiladores.Clases
             //Despues de generarse las producciones de la funcion "primero", dimensionamos la informacion para cargarla
             DataTable dt = new DataTable();
             int columnas = 0;
-            int maximoColumnas = 0;
-            
+            int maximoColumnas;
             for(int i = 0; i < filas.Count; i++)
             {
-                string[] cantidad = filas[i].Split(',');
-                if(cantidad.Length > columnas)
+                string[] elemento = filas[i].Split(',');
+                if(elemento.Length > columnas)
                 {
-                    maximoColumnas = cantidad.Length;
+                    maximoColumnas = elemento.Length;
                     while(columnas < maximoColumnas)
                     {
                         dt.Columns.Add(String.Empty);
                         columnas++;
                     }
                 }
-
-                for(int valorFila = 0; valorFila < cantidad.Length; valorFila++)
+                DataRow dr = dt.NewRow();
+                for(int columna = 0; columna < elemento.Length; columna++)
                 {
-                    DataRow dr = dt.NewRow();
-                    dr[valorFila] = filas[valorFila];
-                    dt.Rows.Add(dr);
+                    dr[columna] = elemento[columna];
                 }
-            }
-
-            for(int i = 0; i < produccionesFuncionPrimero.Columns.Count; i++)
-            {
-                produccionesFuncionPrimero.Columns[i].HeaderText = String.Empty;
+                dt.Rows.Add(dr);
             }
 
             produccionesFuncionPrimero.DataSource = dt;
-            produccionesFuncionPrimero.Columns[0].HeaderText = "Variable";
+            ajuste.FormatoDataGrid(produccionesFuncionPrimero);
         }
 
     }
