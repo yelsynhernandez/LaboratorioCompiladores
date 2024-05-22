@@ -302,7 +302,9 @@ namespace LaboratorioCompiladores.Clases
             return false;
         }
 
-        public void FuncionPrimero(DataGridView gramatica, DataGridView terminales, DataGridView producciones, DataGridView produccionesFuncionPrimero)
+        
+
+        public void FuncionPrimero(DataGridView gramatica, DataGridView terminales, DataGridView dgvVariables, DataGridView produccionesFuncionPrimero)
         {
             List<string> filas = new List<string>();
             string stringFila;
@@ -319,8 +321,19 @@ namespace LaboratorioCompiladores.Clases
 
                 primerPosicion = gramatica.Rows[i].Cells[1].Value.ToString().Trim();
                 //es terminal?
-                if(Buscar(terminales, primerPosicion))
+                if (Buscar(terminales, primerPosicion) || primerPosicion.StartsWith("("))
                 {
+                    stringFila += $"{primerPosicion},";
+                }
+
+                //Es variable?
+                if(Buscar(dgvVariables, primerPosicion))
+                {
+                    string produccionesIdentificadas = null;
+                    while (produccionesIdentificadas != null)
+                    {
+                        //seguir
+                    }
                     stringFila += $"{primerPosicion},";
                 }
 
