@@ -6,14 +6,16 @@ namespace LaboratorioCompiladores.Clases
 {
     internal class Ajuste
     {
-        public void FormatoDataGrid(DataGridView dgv)
+        public void FormatoDataGrid(DataGridView dgv, bool limpiarTitulos = true)
         {
-            foreach (DataGridViewColumn columna in dgv.Columns)
+            if(limpiarTitulos)
             {
-                columna.HeaderText = String.Empty;
+                foreach (DataGridViewColumn columna in dgv.Columns)
+                {
+                    columna.HeaderText = String.Empty;
+                }
+                dgv.Columns[0].HeaderText = "Variable";
             }
-            dgv.Columns[0].HeaderText = "Variable";
-
 
             //Configuracion visual de la tabla
             DataGridViewCellStyle style = new DataGridViewCellStyle();
@@ -47,5 +49,49 @@ namespace LaboratorioCompiladores.Clases
             dgv.ColumnHeadersDefaultCellStyle.ForeColor = ColorTranslator.FromHtml("#000000");
             dgv.EnableHeadersVisualStyles = false;
         }
+
+        public void DimensionarTabla(DataGridView dgvVariables, DataGridView dgvTerminales, DataGridView dgvTablaSimbolos)
+        {
+            // Limpiar cualquier columna existente en dgvTablaSimbolos
+            dgvTablaSimbolos.Columns.Clear();
+
+            // Agregar la primera columna en blanco
+            DataGridViewTextBoxColumn colBlanca = new DataGridViewTextBoxColumn
+            {
+                HeaderText = "",
+                Name = "colBlanca"
+            };
+            dgvTablaSimbolos.Columns.Add(colBlanca);
+
+            // Agregar columnas con títulos tomados de los terminales
+            foreach (DataGridViewRow row in dgvTerminales.Rows)
+            {
+                if (row.Cells[0].Value != null)
+                {
+                    string terminal = row.Cells[0].Value.ToString();
+                    DataGridViewTextBoxColumn colTerminal = new DataGridViewTextBoxColumn
+                    {
+                        HeaderText = terminal,
+                        Name = "col" + terminal
+                    };
+                    dgvTablaSimbolos.Columns.Add(colTerminal);
+                }
+            }
+
+            // Agregar filas con valores tomados de las variables
+            foreach (DataGridViewRow row in dgvVariables.Rows)
+            {
+                if (row.Cells[0].Value != null)
+                {
+                    string variable = row.Cells[0].Value.ToString();
+                    dgvTablaSimbolos.Rows.Add(variable);
+                }
+            }
+
+            // Ajustar el tamaño de las columnas para que se ajusten al contenido
+            dgvTablaSimbolos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            FormatoDataGrid(dgvTablaSimbolos, false);
+        }
+
     }
 }

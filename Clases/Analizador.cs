@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Reflection;
 
 namespace LaboratorioCompiladores.Clases
 {
@@ -72,6 +73,10 @@ namespace LaboratorioCompiladores.Clases
                                 if (produccion.Contains("e") && !epsilonEncontrado)
                                 {
                                     epsilonEncontrado = true;
+                                }
+                                else if(produccion.StartsWith("(") && !terminales.Contains("("))
+                                {
+                                    terminales.Add("(");
                                 }
 
                                 coincidencias = regex.Matches(produccion);
@@ -304,58 +309,86 @@ namespace LaboratorioCompiladores.Clases
 
         
 
-        public void FuncionPrimero(DataGridView gramatica, DataGridView terminales, DataGridView dgvVariables, DataGridView produccionesFuncionPrimero)
+        public void FuncionPrimero(DataGridView dgvProducciones, DataGridView dgvTerminales, DataGridView dgvVariables, DataGridView produccionesFuncionPrimero)
         {
             List<string> filas = new List<string>();
             string stringFila;
 
             string primerPosicion;
             string variable;
-            string variableAnterior = null;
-            for (int i = 0;i < gramatica.Rows.Count; i++)
+            string variableFila;
+            string variableAnterior = string.Empty;
+            bool continuar = true;
+            for (int i = 0; i < dgvProducciones.Rows.Count; i++)
             {
-                variable = gramatica.Rows[i].Cells[0].Value.ToString().Trim();
-                //Asignamos la primer columna a la variable
-                stringFila = $"{variable},";
-
-
-                primerPosicion = gramatica.Rows[i].Cells[1].Value.ToString().Trim();
-                //es terminal?
-                if (Buscar(terminales, primerPosicion) || primerPosicion.StartsWith("("))
+                variable = dgvProducciones.Rows[i].Cells[0].Value.ToString().Trim();
+                //Filtramos para analizar cada variable sin repetir
+                if (variable != variableAnterior)
                 {
-                    stringFila += $"{primerPosicion},";
-                }
-
-                //Es variable?
-                if(Buscar(dgvVariables, primerPosicion))
-                {
-                    string produccionesIdentificadas = null;
-                    while (produccionesIdentificadas != null)
+                    stringFila = $"{variable},";
+                    for (int index = 0; index < dgvProducciones.Rows.Count; index++)
                     {
-                        //seguir
+                        variableFila = dgvProducciones.Rows[index].Cells[0].Value.ToString().Trim();
+                        if (variable == variableFila)
+                        {
+                            primerPosicion = dgvProducciones.Rows[index].Cells[1].Value.ToString().Trim();
+
+                            //inicia con ( ?
+                            if (continuar && primerPosicion.StartsWith("("))
+                            {
+                                stringFila += "(,";
+                                continuar = false;
+                            }
+
+                            //es terminal?
+                            if (continuar && Buscar(dgvTerminales, primerPosicion))
+                            {
+                                stringFila += $"{primerPosicion},";
+                                continuar = false;
+                            }
+
+                            //Es variable?
+                            if (continuar && Buscar(dgvVariables, primerPosicion))
+                            {
+                                string temp = primerPosicion;
+                                string info;
+                                while (continuar)
+                                {
+                                    info = BuscarVariable(dgvProducciones, temp);
+                                    if (Buscar(dgvVariables, info))
+                                    {
+                                        temp = info;
+                                    }
+                                    else
+                                    {
+                                        string prodFila;
+                                        string value;
+                                        for(int prod = 0; prod < dgvProducciones.Rows.Count; prod++)
+                                        {
+                                            prodFila = dgvProducciones.Rows[prod].Cells[0].Value.ToString().Trim();
+                                            if(temp == prodFila)
+                                            {
+                                                value = dgvProducciones.Rows[prod].Cells[1].Value.ToString().Trim();
+                                                if (Buscar(dgvTerminales, value))
+                                                {
+                                                    stringFila += $"{value},";
+                                                }
+                                                else if (value.StartsWith("("))
+                                                {
+                                                    stringFila += "(,";
+                                                }
+                                            }
+                                        }
+                                        continuar = false;
+                                    }
+                                }
+                            }
+                        }
+                        continuar = true;
                     }
-                    stringFila += $"{primerPosicion},";
+                    filas.Add(stringFila.Remove(stringFila.Length - 1));
                 }
-
-                if (variableAnterior != null && (variable == variableAnterior))
-                {
-                    Console.WriteLine($"Analizando la misma variable [{variable}]/[{variableAnterior}]");
-                }
-
-                /*string primerPosicion = gramatica.Rows[i].Cells[1].Value?.ToString();
-                
-                if(Buscar(terminales, primerPosicion))
-                {
-                    resultado.Add(primerPosicion);
-                }
-
-                if(Buscar(producciones, primerPosicion))
-                {
-                    resultado.Add("");
-                }*/
                 variableAnterior = variable;
-                //Agregamos a la lista de producciones, removiendo la última coma
-                filas.Add(stringFila.Remove(stringFila.Length - 1));
             }
 
             //Despues de generarse las producciones de la funcion "primero", dimensionamos la informacion para cargarla
@@ -386,5 +419,21 @@ namespace LaboratorioCompiladores.Clases
             ajuste.FormatoDataGrid(produccionesFuncionPrimero);
         }
 
+        private string BuscarVariable(DataGridView dgvProducciones, string variable)
+        {
+            string resultado = string.Empty;
+
+
+            for (int i = 0; i < dgvProducciones.Rows.Count; i++)
+            {
+                if (dgvProducciones.Rows[i].Cells[0].Value.ToString().Trim() == variable)
+                {
+                    resultado = dgvProducciones.Rows[i].Cells[1].Value.ToString().Trim();
+                    break;
+                }
+            }
+            
+            return resultado;
+        }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using LaboratorioCompiladores.Clases;
 
 namespace LaboratorioCompiladores
 {
@@ -12,6 +13,7 @@ namespace LaboratorioCompiladores
         {
             InitializeComponent();
         }
+        Ajuste ajuste = new Ajuste();
 
         private void BtnSalir_Click(object sender, EventArgs e)
         {
@@ -90,6 +92,9 @@ namespace LaboratorioCompiladores
                     txtGramaticaSinRecursividad.Text = gramaticaAjustada;
                     analizador.GenerarMatrizProducciones(txtGramaticaSinRecursividad, dgvProduccionesSinRecursividad);
                     analizador.FuncionPrimero(dgvProduccionesSinRecursividad, dgvTerminalesSinRecursividad, dgvProduccionesSinRecursividad, dgvFuncionPrimero);
+
+                    //Se da formato al a tabla de símbolos
+                    ajuste.DimensionarTabla(dgvVariablesSinRecursividad, dgvTerminalesSinRecursividad, dgvTablaSimbolos);
                 }
                 else
                 {
@@ -137,8 +142,8 @@ namespace LaboratorioCompiladores
             dgvTerminalesSinRecursividad.Rows.Clear();
             dgvProducciones.DataSource = null;
             dgvProduccionesSinRecursividad.DataSource = null;
-            dgvFuncionPrimero.Rows.Clear();
-            dgvFuncionSiguiente.Rows.Clear();
+            dgvFuncionPrimero.DataSource = null;
+            dgvFuncionSiguiente.DataSource = null;
             dgvTablaSimbolos.Rows.Clear();
             
             
