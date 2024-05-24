@@ -250,7 +250,7 @@
             this.txtArchivo.Margin = new System.Windows.Forms.Padding(4, 8, 4, 2);
             this.txtArchivo.Name = "txtArchivo";
             this.txtArchivo.ReadOnly = true;
-            this.txtArchivo.Size = new System.Drawing.Size(1035, 34);
+            this.txtArchivo.Size = new System.Drawing.Size(1035, 29);
             this.txtArchivo.TabIndex = 1;
             this.txtArchivo.DragDrop += new System.Windows.Forms.DragEventHandler(this.TxtArchivo_DragDrop);
             this.txtArchivo.DragEnter += new System.Windows.Forms.DragEventHandler(this.TxtArchivo_DragEnter);
@@ -263,7 +263,7 @@
             this.lblAutor.Location = new System.Drawing.Point(20, 15);
             this.lblAutor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 0);
             this.lblAutor.Name = "lblAutor";
-            this.lblAutor.Size = new System.Drawing.Size(84, 25);
+            this.lblAutor.Size = new System.Drawing.Size(65, 21);
             this.lblAutor.TabIndex = 0;
             this.lblAutor.Text = "[Autor]";
             this.lblAutor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -299,10 +299,10 @@
             this.lblGramaticaNoRecursiva.AutoSize = true;
             this.tlpPrincipal.SetColumnSpan(this.lblGramaticaNoRecursiva, 7);
             this.lblGramaticaNoRecursiva.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGramaticaNoRecursiva.Location = new System.Drawing.Point(265, 370);
+            this.lblGramaticaNoRecursiva.Location = new System.Drawing.Point(283, 376);
             this.lblGramaticaNoRecursiva.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblGramaticaNoRecursiva.Name = "lblGramaticaNoRecursiva";
-            this.lblGramaticaNoRecursiva.Size = new System.Drawing.Size(166, 27);
+            this.lblGramaticaNoRecursiva.Size = new System.Drawing.Size(130, 21);
             this.lblGramaticaNoRecursiva.TabIndex = 14;
             this.lblGramaticaNoRecursiva.Text = "Sin recursividad";
             // 
@@ -329,10 +329,10 @@
             this.lblContenidoArchivo.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblContenidoArchivo.AutoSize = true;
             this.lblContenidoArchivo.Font = new System.Drawing.Font("Times New Roman", 10.5F, System.Drawing.FontStyle.Bold);
-            this.lblContenidoArchivo.Location = new System.Drawing.Point(26, 115);
+            this.lblContenidoArchivo.Location = new System.Drawing.Point(39, 115);
             this.lblContenidoArchivo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblContenidoArchivo.Name = "lblContenidoArchivo";
-            this.lblContenidoArchivo.Size = new System.Drawing.Size(124, 33);
+            this.lblContenidoArchivo.Size = new System.Drawing.Size(97, 33);
             this.lblContenidoArchivo.TabIndex = 2;
             this.lblContenidoArchivo.Text = "Contenido del Archivo";
             // 
@@ -341,10 +341,10 @@
             this.lblVariablesNoRecursivas.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblVariablesNoRecursivas.AutoSize = true;
             this.lblVariablesNoRecursivas.Font = new System.Drawing.Font("Times New Roman", 14F);
-            this.lblVariablesNoRecursivas.Location = new System.Drawing.Point(690, 88);
+            this.lblVariablesNoRecursivas.Location = new System.Drawing.Point(690, 94);
             this.lblVariablesNoRecursivas.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVariablesNoRecursivas.Name = "lblVariablesNoRecursivas";
-            this.lblVariablesNoRecursivas.Size = new System.Drawing.Size(0, 27);
+            this.lblVariablesNoRecursivas.Size = new System.Drawing.Size(0, 21);
             this.lblVariablesNoRecursivas.TabIndex = 16;
             // 
             // lblGramaticaRecursiva
@@ -353,10 +353,10 @@
             this.lblGramaticaRecursiva.AutoSize = true;
             this.tlpPrincipal.SetColumnSpan(this.lblGramaticaRecursiva, 7);
             this.lblGramaticaRecursiva.Font = new System.Drawing.Font("Times New Roman", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGramaticaRecursiva.Location = new System.Drawing.Point(152, 89);
+            this.lblGramaticaRecursiva.Location = new System.Drawing.Point(192, 93);
             this.lblGramaticaRecursiva.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblGramaticaRecursiva.Name = "lblGramaticaRecursiva";
-            this.lblGramaticaRecursiva.Size = new System.Drawing.Size(392, 26);
+            this.lblGramaticaRecursiva.Size = new System.Drawing.Size(313, 22);
             this.lblGramaticaRecursiva.TabIndex = 18;
             this.lblGramaticaRecursiva.Text = "Información con gramática recursiva";
             // 
@@ -437,10 +437,10 @@
             this.lblFuncionPrimero.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblFuncionPrimero.AutoSize = true;
             this.lblFuncionPrimero.Font = new System.Drawing.Font("Times New Roman", 10.5F, System.Drawing.FontStyle.Bold);
-            this.lblFuncionPrimero.Location = new System.Drawing.Point(716, 128);
+            this.lblFuncionPrimero.Location = new System.Drawing.Point(730, 131);
             this.lblFuncionPrimero.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFuncionPrimero.Name = "lblFuncionPrimero";
-            this.lblFuncionPrimero.Size = new System.Drawing.Size(138, 20);
+            this.lblFuncionPrimero.Size = new System.Drawing.Size(110, 17);
             this.lblFuncionPrimero.TabIndex = 28;
             this.lblFuncionPrimero.Text = "Función primero";
             // 
@@ -449,10 +449,10 @@
             this.lblFuncionSiguiente.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblFuncionSiguiente.AutoSize = true;
             this.lblFuncionSiguiente.Font = new System.Drawing.Font("Times New Roman", 10.5F, System.Drawing.FontStyle.Bold);
-            this.lblFuncionSiguiente.Location = new System.Drawing.Point(902, 128);
+            this.lblFuncionSiguiente.Location = new System.Drawing.Point(915, 131);
             this.lblFuncionSiguiente.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFuncionSiguiente.Name = "lblFuncionSiguiente";
-            this.lblFuncionSiguiente.Size = new System.Drawing.Size(144, 20);
+            this.lblFuncionSiguiente.Size = new System.Drawing.Size(117, 17);
             this.lblFuncionSiguiente.TabIndex = 29;
             this.lblFuncionSiguiente.Text = "Función siguiente";
             // 
@@ -481,16 +481,16 @@
             this.lblTablaSimbolos.AutoSize = true;
             this.tlpPrincipal.SetColumnSpan(this.lblTablaSimbolos, 3);
             this.lblTablaSimbolos.Font = new System.Drawing.Font("Times New Roman", 10.5F, System.Drawing.FontStyle.Bold);
-            this.lblTablaSimbolos.Location = new System.Drawing.Point(805, 377);
+            this.lblTablaSimbolos.Location = new System.Drawing.Point(822, 380);
             this.lblTablaSimbolos.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTablaSimbolos.Name = "lblTablaSimbolos";
-            this.lblTablaSimbolos.Size = new System.Drawing.Size(148, 20);
+            this.lblTablaSimbolos.Size = new System.Drawing.Size(115, 17);
             this.lblTablaSimbolos.TabIndex = 31;
             this.lblTablaSimbolos.Text = "Tabla de símbolos";
             // 
             // FrmPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1082, 661);
             this.Controls.Add(this.tlpPrincipal);

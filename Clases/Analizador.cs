@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using System.Data;
 using System.Linq;
 using System.Text;
-using System.Reflection;
+using System.ComponentModel;
 
 namespace LaboratorioCompiladores.Clases
 {
@@ -25,6 +25,8 @@ namespace LaboratorioCompiladores.Clases
                     dgv.Rows.Add(elemento);
                 }
             }
+
+            ajuste.FormatoDataGrid(dgv);
         }
 
         private bool EncontrarProduccion(List<string[]> lista, string variable, string produccion)
@@ -100,10 +102,6 @@ namespace LaboratorioCompiladores.Clases
                 CargarContenido(terminales, dgvTerminales);
                 dgvVariables.Columns[0].HeaderText = $"Variables [{variables.Count}]";
                 dgvTerminales.Columns[0].HeaderText = $"Terminales [{terminales.Count}]";
-                dgvVariables.AutoResizeColumn(0, DataGridViewAutoSizeColumnMode.DisplayedCells);
-                dgvVariables.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
-                dgvTerminales.AutoResizeColumn(0, DataGridViewAutoSizeColumnMode.DisplayedCells);
-                dgvTerminales.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
             catch(Exception ex)
             {
@@ -307,7 +305,22 @@ namespace LaboratorioCompiladores.Clases
             return false;
         }
 
-        
+        private string BuscarVariable(DataGridView dgvProducciones, string variable)
+        {
+            string resultado = string.Empty;
+
+
+            for (int i = 0; i < dgvProducciones.Rows.Count; i++)
+            {
+                if (dgvProducciones.Rows[i].Cells[0].Value.ToString().Trim() == variable)
+                {
+                    resultado = dgvProducciones.Rows[i].Cells[1].Value.ToString().Trim();
+                    break;
+                }
+            }
+
+            return resultado;
+        }
 
         public void FuncionPrimero(DataGridView dgvProducciones, DataGridView dgvTerminales, DataGridView dgvVariables, DataGridView produccionesFuncionPrimero)
         {
@@ -392,48 +405,93 @@ namespace LaboratorioCompiladores.Clases
             }
 
             //Despues de generarse las producciones de la funcion "primero", dimensionamos la informacion para cargarla
-            DataTable dt = new DataTable();
-            int columnas = 0;
-            int maximoColumnas;
-            for(int i = 0; i < filas.Count; i++)
-            {
-                string[] elemento = filas[i].Split(',');
-                if(elemento.Length > columnas)
-                {
-                    maximoColumnas = elemento.Length;
-                    while(columnas < maximoColumnas)
-                    {
-                        dt.Columns.Add(String.Empty);
-                        columnas++;
-                    }
-                }
-                DataRow dr = dt.NewRow();
-                for(int columna = 0; columna < elemento.Length; columna++)
-                {
-                    dr[columna] = elemento[columna];
-                }
-                dt.Rows.Add(dr);
-            }
-
-            produccionesFuncionPrimero.DataSource = dt;
-            ajuste.FormatoDataGrid(produccionesFuncionPrimero);
+            ajuste.EscribirResultadosFuncion(filas, produccionesFuncionPrimero);
         }
 
-        private string BuscarVariable(DataGridView dgvProducciones, string variable)
+        public void FuncionSiguiente(TextBox gramatica, DataGridView produccionesFuncionSiguiente)
         {
-            string resultado = string.Empty;
+            string[] lineas = gramatica.Text.Split('\n');
+            List<string> filas = new List<string>();
+            bool variableInicial = true;
+            //bool continuar = false;
+            string stringFila;
+            string izquierda;
+            string derecha;
+            string variable;
 
 
-            for (int i = 0; i < dgvProducciones.Rows.Count; i++)
+            for(int puntero = 0; puntero < lineas.Length; puntero++)
             {
-                if (dgvProducciones.Rows[i].Cells[0].Value.ToString().Trim() == variable)
+                if (lineas[puntero].Length > 0)
                 {
-                    resultado = dgvProducciones.Rows[i].Cells[1].Value.ToString().Trim();
-                    break;
+                    string[] parte = lineas[puntero].Split('=');
+                    variable = parte[0];
+                    stringFila = $"{parte[0]},";
+
+                    for (int produccion = 0; produccion < lineas.Length; produccion++)
+                    {
+                        if (lineas[produccion].Length > 0)
+                        {
+                            string[] lineaProduccion = lineas[produccion].Split('=');
+                            string[] producciones = lineaProduccion[1].Split('|');
+
+                            foreach (string valor in producciones)
+                            {
+                                string[] parteProducion = valor.Split(' ');
+                                for (int x = 0; x < parteProducion.Length; x++)
+                                {
+                                    parteProducion[x] = parteProducion[x].Replace("\r", String.Empty);
+                                }
+
+                                if (parteProducion.Length == 1)
+                                {
+                                    if (variableInicial &&
+                                        parteProducion[0].Contains(variable) &&
+                                        parteProducion[0].StartsWith("(") && parteProducion[0].EndsWith(")"))
+                                    {
+                                        stringFila += "),$,";
+                                        variableInicial = false;
+                                    }
+                                }
+                                else if (!variableInicial && parteProducion.Length == 2)
+                                {
+                                    izquierda = parteProducion[0];
+                                    derecha = parteProducion[1];
+                                    if(derecha == variable)
+                                    {
+                                        stringFila += "),$,";
+                                    }
+                                }
+                                else if (!variableInicial && parteProducion.Length == 3)
+                                {
+                                    derecha = parteProducion[2];
+                                    if(derecha == variable)
+                                    {
+                                        stringFila += "),$,";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    filas.Add(stringFila.Remove(stringFila.Length - 1));
                 }
             }
+
+            for(int posicion = 0; posicion < filas.Count; posicion++)
+            {
+                List<string> nuevaFila = new List<string>();
+                string[] elemento = filas[posicion].Split(',');
+                foreach(string valor in elemento)
+                {
+                    if (!nuevaFila.Contains(valor))
+                    {
+                        nuevaFila.Add(valor);
+                    }
+                }
+                filas[posicion] = String.Join(",",nuevaFila);
+            }
             
-            return resultado;
+            ajuste.EscribirResultadosFuncion(filas, produccionesFuncionSiguiente);
         }
     }
 }

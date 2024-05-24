@@ -92,9 +92,11 @@ namespace LaboratorioCompiladores
                     txtGramaticaSinRecursividad.Text = gramaticaAjustada;
                     analizador.GenerarMatrizProducciones(txtGramaticaSinRecursividad, dgvProduccionesSinRecursividad);
                     analizador.FuncionPrimero(dgvProduccionesSinRecursividad, dgvTerminalesSinRecursividad, dgvProduccionesSinRecursividad, dgvFuncionPrimero);
+                    analizador.FuncionSiguiente(txtGramaticaSinRecursividad, dgvFuncionSiguiente);
 
                     //Se da formato al a tabla de símbolos
                     ajuste.DimensionarTabla(dgvVariablesSinRecursividad, dgvTerminalesSinRecursividad, dgvTablaSimbolos);
+                    //analizador.GenerarTablaProducciones();
                 }
                 else
                 {
@@ -145,7 +147,7 @@ namespace LaboratorioCompiladores
             dgvFuncionPrimero.DataSource = null;
             dgvFuncionSiguiente.DataSource = null;
             dgvTablaSimbolos.Rows.Clear();
-            
+            dgvTablaSimbolos.Columns.Clear();
             
             dgvVariables.Columns[0].HeaderText = "Variables";
             dgvTerminales.Columns[0].HeaderText = "Terminales";

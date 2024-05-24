@@ -1,6 +1,8 @@
 ﻿using System.Drawing;
 using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Data;
 
 namespace LaboratorioCompiladores.Clases
 {
@@ -52,14 +54,12 @@ namespace LaboratorioCompiladores.Clases
 
         public void DimensionarTabla(DataGridView dgvVariables, DataGridView dgvTerminales, DataGridView dgvTablaSimbolos)
         {
-            // Limpiar cualquier columna existente en dgvTablaSimbolos
             dgvTablaSimbolos.Columns.Clear();
 
-            // Agregar la primera columna en blanco
             DataGridViewTextBoxColumn colBlanca = new DataGridViewTextBoxColumn
             {
                 HeaderText = "",
-                Name = "colBlanca"
+                Name = "variables"
             };
             dgvTablaSimbolos.Columns.Add(colBlanca);
 
@@ -91,6 +91,35 @@ namespace LaboratorioCompiladores.Clases
             // Ajustar el tamaño de las columnas para que se ajusten al contenido
             dgvTablaSimbolos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             FormatoDataGrid(dgvTablaSimbolos, false);
+        }
+
+        public void EscribirResultadosFuncion(List<string> lista, DataGridView dgv)
+        {
+            DataTable dt = new DataTable();
+            int columnas = 0;
+            int maximoColumnas;
+            for (int i = 0; i < lista.Count; i++)
+            {
+                string[] elemento = lista[i].Split(',');
+                if (elemento.Length > columnas)
+                {
+                    maximoColumnas = elemento.Length;
+                    while (columnas < maximoColumnas)
+                    {
+                        dt.Columns.Add(String.Empty);
+                        columnas++;
+                    }
+                }
+                DataRow dr = dt.NewRow();
+                for (int columna = 0; columna < elemento.Length; columna++)
+                {
+                    dr[columna] = elemento[columna];
+                }
+                dt.Rows.Add(dr);
+            }
+
+            dgv.DataSource = dt;
+            FormatoDataGrid(dgv);
         }
 
     }
