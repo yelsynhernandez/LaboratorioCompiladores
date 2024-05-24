@@ -325,7 +325,7 @@ namespace LaboratorioCompiladores.Clases
         public void FuncionPrimero(DataGridView dgvProducciones, DataGridView dgvTerminales, DataGridView dgvVariables, DataGridView produccionesFuncionPrimero)
         {
             List<string> filas = new List<string>();
-            string stringFila;
+            string stringProduccion;
 
             string primerPosicion;
             string variable;
@@ -338,7 +338,7 @@ namespace LaboratorioCompiladores.Clases
                 //Filtramos para analizar cada variable sin repetir
                 if (variable != variableAnterior)
                 {
-                    stringFila = $"{variable},";
+                    stringProduccion = $"{variable},";
                     for (int index = 0; index < dgvProducciones.Rows.Count; index++)
                     {
                         variableFila = dgvProducciones.Rows[index].Cells[0].Value.ToString().Trim();
@@ -349,14 +349,14 @@ namespace LaboratorioCompiladores.Clases
                             //inicia con ( ?
                             if (continuar && primerPosicion.StartsWith("("))
                             {
-                                stringFila += "(,";
+                                stringProduccion += "(,";
                                 continuar = false;
                             }
 
                             //es terminal?
                             if (continuar && Buscar(dgvTerminales, primerPosicion))
                             {
-                                stringFila += $"{primerPosicion},";
+                                stringProduccion += $"{primerPosicion},";
                                 continuar = false;
                             }
 
@@ -384,11 +384,11 @@ namespace LaboratorioCompiladores.Clases
                                                 value = dgvProducciones.Rows[prod].Cells[1].Value.ToString().Trim();
                                                 if (Buscar(dgvTerminales, value))
                                                 {
-                                                    stringFila += $"{value},";
+                                                    stringProduccion += $"{value},";
                                                 }
                                                 else if (value.StartsWith("("))
                                                 {
-                                                    stringFila += "(,";
+                                                    stringProduccion += "(,";
                                                 }
                                             }
                                         }
@@ -399,7 +399,7 @@ namespace LaboratorioCompiladores.Clases
                         }
                         continuar = true;
                     }
-                    filas.Add(stringFila.Remove(stringFila.Length - 1));
+                    filas.Add(stringProduccion.Remove(stringProduccion.Length - 1));
                 }
                 variableAnterior = variable;
             }
@@ -408,17 +408,15 @@ namespace LaboratorioCompiladores.Clases
             ajuste.EscribirResultadosFuncion(filas, produccionesFuncionPrimero);
         }
 
-        public void FuncionSiguiente(TextBox gramatica, DataGridView produccionesFuncionSiguiente)
+        public void FuncionSiguiente(TextBox gramatica, DataGridView gramaticaSinRecursividad,DataGridView produccionesFuncionPrimero ,DataGridView produccionesFuncionSiguiente)
         {
             string[] lineas = gramatica.Text.Split('\n');
             List<string> filas = new List<string>();
             bool variableInicial = true;
-            //bool continuar = false;
-            string stringFila;
-            string izquierda;
-            string derecha;
+            string stringProduccion = String.Empty;
             string variable;
 
+            Dictionary<string, string> diccionarioProducciones = new Dictionary<string, string>();
 
             for(int puntero = 0; puntero < lineas.Length; puntero++)
             {
@@ -426,7 +424,7 @@ namespace LaboratorioCompiladores.Clases
                 {
                     string[] parte = lineas[puntero].Split('=');
                     variable = parte[0];
-                    stringFila = $"{parte[0]},";
+                    //stringProduccion = $"{parte[0]},";
 
                     for (int produccion = 0; produccion < lineas.Length; produccion++)
                     {
@@ -437,43 +435,108 @@ namespace LaboratorioCompiladores.Clases
 
                             foreach (string valor in producciones)
                             {
-                                string[] parteProducion = valor.Split(' ');
-                                for (int x = 0; x < parteProducion.Length; x++)
+                                string[] parteProduccion = valor.Split(' ');
+                                for (int x = 0; x < parteProduccion.Length; x++)
                                 {
-                                    parteProducion[x] = parteProducion[x].Replace("\r", String.Empty);
+                                    parteProduccion[x] = parteProduccion[x].Replace("\r", String.Empty);
                                 }
 
-                                if (parteProducion.Length == 1)
+                                Console.WriteLine($"Analizando variable[{variable}]");
+                                Console.WriteLine($"Producciones[{String.Join(",", parteProduccion)}]\n");
+                                if (ExisteEnProducciones(variable, parteProduccion))
                                 {
-                                    if (variableInicial &&
-                                        parteProducion[0].Contains(variable) &&
-                                        parteProducion[0].StartsWith("(") && parteProducion[0].EndsWith(")"))
+                                    if (parteProduccion.Length == 1)
                                     {
-                                        stringFila += "),$,";
-                                        variableInicial = false;
+                                        if (variableInicial &&
+                                            parteProduccion[0].StartsWith("(") &&
+                                            parteProduccion[0].Contains(variable) &&
+                                            parteProduccion[0].EndsWith(")"))
+                                        {
+                                            stringProduccion += "),$,";
+                                            variableInicial = false;
+                                            if (!diccionarioProducciones.ContainsKey(variable))
+                                            {
+                                                diccionarioProducciones.Add(variable, "),$,");
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (!variableInicial)
+                                        {
+                                            //está en la ultima posición?
+                                            if (parteProduccion[parteProduccion.Length - 1] == variable)
+                                            {
+                                                if (variable.Contains("1"))
+                                                {
+                                                    string temp = variable.Replace("1", String.Empty);
+                                                    string prods = diccionarioProducciones[temp];
+                                                    stringProduccion += prods;
+                                                    if (!diccionarioProducciones.ContainsKey(variable))
+                                                    {
+                                                        diccionarioProducciones.Add(variable, prods);
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                int posicion = 0;
+                                                //buscamos la posicion de nuestra variable
+                                                for (int x = 0; x < parteProduccion.Length; x++)
+                                                {
+                                                    if (parteProduccion[x] == variable)
+                                                    {
+                                                        posicion = x;
+                                                        break;
+                                                    }
+                                                }
+
+                                                //Buscamos la posicion al lado de la variable
+                                                string siguiente = parteProduccion[posicion + 1];
+
+                                                //Calculamos si las producciones de la funcion "primero" de la variable siguiente contienen a epsilon
+                                                string variableProduccionPrimero;
+                                                string produccionPrimero;
+                                                string tempProduccionesPrimero = String.Empty;
+                                                bool contieneEpsilon = false;
+                                                for (int pp = 0; pp < produccionesFuncionPrimero.Rows.Count; pp++)
+                                                {
+                                                    variableProduccionPrimero = produccionesFuncionPrimero.Rows[pp].Cells[0].Value.ToString().Trim();
+                                                    if (variableProduccionPrimero == siguiente)
+                                                    {
+                                                        for (int columnaPP = 1; columnaPP < produccionesFuncionPrimero.Columns.Count; columnaPP++)
+                                                        {
+                                                            produccionPrimero = produccionesFuncionPrimero.Rows[pp].Cells[columnaPP].Value.ToString().Trim();
+                                                            if (produccionPrimero == "e")
+                                                            {
+                                                                contieneEpsilon = true;
+                                                                break;
+                                                            }
+                                                            else
+                                                            {
+                                                                tempProduccionesPrimero += $"{produccionPrimero},";
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                if (contieneEpsilon)
+                                                {
+                                                    //S(B) -> P(B) y contiene e, entonces P(B) U S(A)
+                                                    stringProduccion = tempProduccionesPrimero + diccionarioProducciones[siguiente];
+                                                }
+                                            }
+                                        }
                                     }
                                 }
-                                else if (!variableInicial && parteProducion.Length == 2)
-                                {
-                                    izquierda = parteProducion[0];
-                                    derecha = parteProducion[1];
-                                    if(derecha == variable)
-                                    {
-                                        stringFila += "),$,";
-                                    }
-                                }
-                                else if (!variableInicial && parteProducion.Length == 3)
-                                {
-                                    derecha = parteProducion[2];
-                                    if(derecha == variable)
-                                    {
-                                        stringFila += "),$,";
-                                    }
-                                }
-                            }
-                        }
+                            } //Recorrido de las producciones
+                        } //linea con longitud mayor a cero
                     }
-                    filas.Add(stringFila.Remove(stringFila.Length - 1));
+                    filas.Add($"{variable},{stringProduccion.Remove(stringProduccion.Length - 1)}");
+                    if (!diccionarioProducciones.ContainsKey(variable))
+                    {
+                        diccionarioProducciones.Add(variable, stringProduccion);
+                    }
                 }
             }
 
@@ -492,6 +555,19 @@ namespace LaboratorioCompiladores.Clases
             }
             
             ajuste.EscribirResultadosFuncion(filas, produccionesFuncionSiguiente);
+        }
+
+        private bool ExisteEnProducciones(string variable, string[] producciones)
+        {
+            for(int i = 0; i < producciones.Length; i++)
+            {
+                if(variable == producciones[i] || 
+                   ( producciones[i].StartsWith("(") && producciones[i].Contains(variable) && producciones[i].EndsWith(")") ))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

@@ -51,7 +51,7 @@
             this.ColumnaVariableRecursiva = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvTerminales = new System.Windows.Forms.DataGridView();
             this.VariableTerminalRecursiva = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvProduccionesSinRecursividad = new System.Windows.Forms.DataGridView();
+            this.dgvGramaticaSinRecursividad = new System.Windows.Forms.DataGridView();
             this.lblFuncionPrimero = new System.Windows.Forms.Label();
             this.lblFuncionSiguiente = new System.Windows.Forms.Label();
             this.dgvTablaSimbolos = new System.Windows.Forms.DataGridView();
@@ -64,7 +64,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducciones)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVariables)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTerminales)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProduccionesSinRecursividad)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGramaticaSinRecursividad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTablaSimbolos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -125,7 +125,7 @@
             this.tlpPrincipal.Controls.Add(this.lblGramaticaRecursiva, 1, 3);
             this.tlpPrincipal.Controls.Add(this.dgvVariables, 3, 5);
             this.tlpPrincipal.Controls.Add(this.dgvTerminales, 5, 5);
-            this.tlpPrincipal.Controls.Add(this.dgvProduccionesSinRecursividad, 7, 7);
+            this.tlpPrincipal.Controls.Add(this.dgvGramaticaSinRecursividad, 7, 7);
             this.tlpPrincipal.Controls.Add(this.btnSalir, 11, 8);
             this.tlpPrincipal.Controls.Add(this.lblFuncionPrimero, 9, 4);
             this.tlpPrincipal.Controls.Add(this.lblFuncionSiguiente, 11, 4);
@@ -414,23 +414,23 @@
             this.VariableTerminalRecursiva.ReadOnly = true;
             this.VariableTerminalRecursiva.Width = 125;
             // 
-            // dgvProduccionesSinRecursividad
+            // dgvGramaticaSinRecursividad
             // 
-            this.dgvProduccionesSinRecursividad.AllowUserToAddRows = false;
-            this.dgvProduccionesSinRecursividad.AllowUserToDeleteRows = false;
-            this.dgvProduccionesSinRecursividad.AllowUserToResizeColumns = false;
-            this.dgvProduccionesSinRecursividad.AllowUserToResizeRows = false;
-            this.dgvProduccionesSinRecursividad.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dgvProduccionesSinRecursividad.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvProduccionesSinRecursividad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProduccionesSinRecursividad.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvProduccionesSinRecursividad.Location = new System.Drawing.Point(440, 399);
-            this.dgvProduccionesSinRecursividad.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dgvProduccionesSinRecursividad.Name = "dgvProduccionesSinRecursividad";
-            this.dgvProduccionesSinRecursividad.ReadOnly = true;
-            this.dgvProduccionesSinRecursividad.RowHeadersWidth = 51;
-            this.dgvProduccionesSinRecursividad.Size = new System.Drawing.Size(238, 211);
-            this.dgvProduccionesSinRecursividad.TabIndex = 23;
+            this.dgvGramaticaSinRecursividad.AllowUserToAddRows = false;
+            this.dgvGramaticaSinRecursividad.AllowUserToDeleteRows = false;
+            this.dgvGramaticaSinRecursividad.AllowUserToResizeColumns = false;
+            this.dgvGramaticaSinRecursividad.AllowUserToResizeRows = false;
+            this.dgvGramaticaSinRecursividad.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dgvGramaticaSinRecursividad.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvGramaticaSinRecursividad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvGramaticaSinRecursividad.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvGramaticaSinRecursividad.Location = new System.Drawing.Point(440, 399);
+            this.dgvGramaticaSinRecursividad.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgvGramaticaSinRecursividad.Name = "dgvGramaticaSinRecursividad";
+            this.dgvGramaticaSinRecursividad.ReadOnly = true;
+            this.dgvGramaticaSinRecursividad.RowHeadersWidth = 51;
+            this.dgvGramaticaSinRecursividad.Size = new System.Drawing.Size(238, 211);
+            this.dgvGramaticaSinRecursividad.TabIndex = 23;
             // 
             // lblFuncionPrimero
             // 
@@ -510,7 +510,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducciones)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVariables)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTerminales)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProduccionesSinRecursividad)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGramaticaSinRecursividad)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTablaSimbolos)).EndInit();
             this.ResumeLayout(false);
 
@@ -534,7 +534,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnaVariableRecursiva;
         private System.Windows.Forms.DataGridView dgvTerminales;
         private System.Windows.Forms.DataGridViewTextBoxColumn VariableTerminalRecursiva;
-        private System.Windows.Forms.DataGridView dgvProduccionesSinRecursividad;
+        private System.Windows.Forms.DataGridView dgvGramaticaSinRecursividad;
         private System.Windows.Forms.DataGridView dgvTerminalesSinRecursividad;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridView dgvVariablesSinRecursividad;

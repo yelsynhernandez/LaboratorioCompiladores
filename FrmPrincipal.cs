@@ -3,7 +3,6 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using LaboratorioCompiladores.Clases;
 
 namespace LaboratorioCompiladores
 {
@@ -90,9 +89,9 @@ namespace LaboratorioCompiladores
                     analizador.DistribuirContenido(txtGramaticaSinRecursividad, dgvVariablesSinRecursividad, dgvTerminalesSinRecursividad);
                     string gramaticaAjustada = analizador.AjustarGramatica(txtGramaticaSinRecursividad.Text);
                     txtGramaticaSinRecursividad.Text = gramaticaAjustada;
-                    analizador.GenerarMatrizProducciones(txtGramaticaSinRecursividad, dgvProduccionesSinRecursividad);
-                    analizador.FuncionPrimero(dgvProduccionesSinRecursividad, dgvTerminalesSinRecursividad, dgvProduccionesSinRecursividad, dgvFuncionPrimero);
-                    analizador.FuncionSiguiente(txtGramaticaSinRecursividad, dgvFuncionSiguiente);
+                    analizador.GenerarMatrizProducciones(txtGramaticaSinRecursividad, dgvGramaticaSinRecursividad);
+                    analizador.FuncionPrimero(dgvGramaticaSinRecursividad, dgvTerminalesSinRecursividad, dgvGramaticaSinRecursividad, dgvFuncionPrimero);
+                    analizador.FuncionSiguiente(txtGramaticaSinRecursividad, dgvGramaticaSinRecursividad,dgvFuncionPrimero, dgvFuncionSiguiente);
 
                     //Se da formato al a tabla de símbolos
                     ajuste.DimensionarTabla(dgvVariablesSinRecursividad, dgvTerminalesSinRecursividad, dgvTablaSimbolos);
@@ -143,7 +142,7 @@ namespace LaboratorioCompiladores
             dgvVariablesSinRecursividad.Rows.Clear();
             dgvTerminalesSinRecursividad.Rows.Clear();
             dgvProducciones.DataSource = null;
-            dgvProduccionesSinRecursividad.DataSource = null;
+            dgvGramaticaSinRecursividad.DataSource = null;
             dgvFuncionPrimero.DataSource = null;
             dgvFuncionSiguiente.DataSource = null;
             dgvTablaSimbolos.Rows.Clear();
