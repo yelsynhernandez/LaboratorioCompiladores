@@ -95,7 +95,7 @@ namespace LaboratorioCompiladores
 
                     //Se da formato al a tabla de símbolos
                     ajuste.DimensionarTabla(dgvVariablesSinRecursividad, dgvTerminalesSinRecursividad, dgvTablaSimbolos);
-                    //analizador.GenerarTablaProducciones();
+                    analizador.GenerarTablaSimbolos(txtGramaticaSinRecursividad, dgvGramaticaSinRecursividad, dgvTablaSimbolos, dgvFuncionPrimero, dgvFuncionSiguiente);
                 }
                 else
                 {
@@ -115,8 +115,8 @@ namespace LaboratorioCompiladores
 
         private void TextoDefecto(bool defecto)
         {
-            string fuente = "Arial";
-            float tamanio = 14F;
+            string fuente = "Times New Roman";
+            float tamanio = 12F;
 
             if (defecto)
             {

@@ -441,8 +441,6 @@ namespace LaboratorioCompiladores.Clases
                                     parteProduccion[x] = parteProduccion[x].Replace("\r", String.Empty);
                                 }
 
-                                Console.WriteLine($"Analizando variable[{variable}]");
-                                Console.WriteLine($"Producciones[{String.Join(",", parteProduccion)}]\n");
                                 if (ExisteEnProducciones(variable, parteProduccion))
                                 {
                                     if (parteProduccion.Length == 1)
@@ -525,6 +523,10 @@ namespace LaboratorioCompiladores.Clases
                                                     //S(B) -> P(B) y contiene e, entonces P(B) U S(A)
                                                     stringProduccion = tempProduccionesPrimero + diccionarioProducciones[siguiente];
                                                 }
+                                                else
+                                                {
+                                                    stringProduccion = tempProduccionesPrimero;
+                                                }
                                             }
                                         }
                                     }
@@ -568,6 +570,130 @@ namespace LaboratorioCompiladores.Clases
                 }
             }
             return false;
+        }
+
+        //----------------------------------------------------- Generación de tabla de simbolos
+        private bool ExisteEnProduccionesPrimero(string variable, string produccion, DataGridView produccionesFuncionPrimero)
+        {
+            string variablePrimero;
+            string produccionPrimero;
+            for(int fila = 0; fila < produccionesFuncionPrimero.Rows.Count; fila++)
+            {
+                variablePrimero = produccionesFuncionPrimero.Rows[fila].Cells[0].Value.ToString().Trim();
+                if(variable == variablePrimero)
+                {
+                    for (int columna = 1; columna < produccionesFuncionPrimero.Columns.Count; columna++)
+                    {
+                        produccionPrimero = produccionesFuncionPrimero.Rows[fila].Cells[columna].Value.ToString().Trim();
+                        if(produccion == produccionPrimero)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        private string DevolverProduccion(string variable, string produccion, DataGridView producciones, bool evaluarIndividual = false)
+        {
+            string resultado = String.Empty;
+
+            string variableGramatica;
+            string produccionGramatica;
+
+            if (!evaluarIndividual)
+            {
+                for (int i = 0; i < producciones.Rows.Count; i++)
+                {
+                    variableGramatica = producciones.Rows[i].Cells[0].Value.ToString().Trim();
+                    if (variable == variableGramatica)
+                    {
+                        produccionGramatica = producciones.Rows[i].Cells[1].Value.ToString().Trim();
+                        if (produccion == produccionGramatica)
+                        {
+                            for (int columna = 1; columna < producciones.Columns.Count; columna++)
+                            {
+                                string temp = producciones.Rows[i].Cells[columna].Value.ToString().Trim();
+                                resultado += temp;
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < producciones.Rows.Count; i++)
+                {
+                    variableGramatica = producciones.Rows[i].Cells[0].Value.ToString().Trim();
+                    if (variable == variableGramatica)
+                    {
+                        produccionGramatica = producciones.Rows[i].Cells[1].Value.ToString().Trim();
+                        if (produccion.StartsWith("(") && produccionGramatica.StartsWith("("))
+                        {
+                            resultado = produccionGramatica;
+                            break;
+                        }
+                        else if (produccion == produccionGramatica)
+                        {
+                            resultado = produccionGramatica;
+                            break;
+                        }
+                    }
+                }
+            }
+            return resultado;
+        }
+
+        public void GenerarTablaSimbolos(TextBox gramatica, DataGridView dgvGramatica,DataGridView tablaSimbolos, DataGridView produccionesFuncionPrimero, DataGridView produccionesFuncionSiguiente)
+        {
+            Dictionary<string, string> gramaticaSinRecursividad = new Dictionary<string, string>();
+            string variable;
+            string produccion;
+
+            foreach (string linea in gramatica.Lines)
+            {
+                if (linea.Length > 0)
+                {
+                    string[] info = linea.Split('=');
+                    for (int indice = 0; indice < info.Length; indice++)
+                    {
+                        info[indice] = info[indice].Replace(" ", string.Empty);
+                        info[indice] = info[indice].Replace("\r", string.Empty);
+                    }
+                    gramaticaSinRecursividad.Add(info[0], info[1]);
+                }
+            }
+
+
+            for (int fila = 0; fila < tablaSimbolos.Rows.Count; fila++)
+            {
+                variable = tablaSimbolos.Rows[fila].Cells[0].Value.ToString().Trim();
+                for (int columna = 1; columna < tablaSimbolos.Columns.Count; columna++)
+                {
+                    produccion = tablaSimbolos.Columns[columna].HeaderText.Trim();
+                    string resultado = String.Empty;
+                    if (ExisteEnProduccionesPrimero(variable, produccion, produccionesFuncionPrimero))
+                    {
+                        resultado = gramaticaSinRecursividad[variable];
+                        if (resultado.Contains("|") && resultado.Contains("e"))
+                        {
+                            resultado = DevolverProduccion(variable, produccion, dgvGramatica);
+                        }
+                        else if (resultado.Contains("|"))
+                        {
+                            resultado = DevolverProduccion(variable, produccion, dgvGramatica, true);
+                        }
+                    }
+                    else if (variable.Contains("1") &&
+                             (produccion == ")" || produccion == "$"))
+                    {
+                        resultado = "e";
+                    }
+                    Console.WriteLine($"Posición [{variable},{produccion}] = {resultado}");
+                    tablaSimbolos.Rows[fila].Cells[columna].Value = resultado;
+                }
+            }
         }
     }
 }

@@ -56,13 +56,10 @@ namespace LaboratorioCompiladores.Clases
         {
             dgvTablaSimbolos.Columns.Clear();
 
-            DataGridViewTextBoxColumn colBlanca = new DataGridViewTextBoxColumn
-            {
-                HeaderText = "",
-                Name = "variables"
-            };
+            DataGridViewTextBoxColumn colBlanca = new DataGridViewTextBoxColumn { HeaderText = "", Name = "variables" };
+            DataGridViewTextBoxColumn colFinLinea = new DataGridViewTextBoxColumn { HeaderText = "$", Name = "columnaFinLinea" };
+            
             dgvTablaSimbolos.Columns.Add(colBlanca);
-
             // Agregar columnas con títulos tomados de los terminales
             foreach (DataGridViewRow row in dgvTerminales.Rows)
             {
@@ -77,6 +74,8 @@ namespace LaboratorioCompiladores.Clases
                     dgvTablaSimbolos.Columns.Add(colTerminal);
                 }
             }
+            dgvTablaSimbolos.Columns[dgvTablaSimbolos.Columns.Count - 1].HeaderText = ")";
+            dgvTablaSimbolos.Columns.Add(colFinLinea);
 
             // Agregar filas con valores tomados de las variables
             foreach (DataGridViewRow row in dgvVariables.Rows)
@@ -121,6 +120,5 @@ namespace LaboratorioCompiladores.Clases
             dgv.DataSource = dt;
             FormatoDataGrid(dgv);
         }
-
     }
 }
