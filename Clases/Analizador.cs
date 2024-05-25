@@ -47,11 +47,12 @@ namespace LaboratorioCompiladores.Clases
                 Regex regex;
                 MatchCollection coincidencias;
                 string terminal;
-                string er;
+                string er = @"\'(.*?)\'"; ;
                 string[] contenido;
                 string[] producciones;
                 bool epsilonEncontrado = false;
-                
+
+                regex = new Regex(er);
                 foreach (string linea in txtContenido.Lines)
                 {
                     if (linea.Length > 0)
@@ -68,8 +69,6 @@ namespace LaboratorioCompiladores.Clases
                             //Revision de las producciones
                             contenido[1] = contenido[1].Trim(' ');
                             producciones = contenido[1].Split(new String[] { "|" }, StringSplitOptions.None);
-                            er = @"\'(.*?)\'";
-                            regex = new Regex(er);
                             foreach (string produccion in producciones)
                             {
                                 if (produccion.Contains("e") && !epsilonEncontrado)
@@ -690,7 +689,6 @@ namespace LaboratorioCompiladores.Clases
                     {
                         resultado = "e";
                     }
-                    Console.WriteLine($"Posición [{variable},{produccion}] = {resultado}");
                     tablaSimbolos.Rows[fila].Cells[columna].Value = resultado;
                 }
             }
