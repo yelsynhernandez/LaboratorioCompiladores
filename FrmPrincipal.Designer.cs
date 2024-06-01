@@ -500,7 +500,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "FrmPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Laboratorio 1 - Compiladores";
+            this.Text = "Proyecto  - Compiladores";
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             this.tlpPrincipal.ResumeLayout(false);
             this.tlpPrincipal.PerformLayout();
